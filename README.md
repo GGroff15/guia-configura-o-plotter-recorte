@@ -1,0 +1,1 @@
+# guia-configura-o-plotter-recorte
