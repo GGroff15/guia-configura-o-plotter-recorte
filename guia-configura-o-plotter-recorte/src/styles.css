@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import url(assets/theme.css);
 @import "https://cdn.jsdelivr.net/npm/beercss@3.4.0/dist/cdn/beer.min.css";
 
+@import url(assets/theme.css);
+
 body {
-    background: var(--material-theme-sys-light-background, #FEF7FF);
-    margin: 0;
+    height: 100%;
 }

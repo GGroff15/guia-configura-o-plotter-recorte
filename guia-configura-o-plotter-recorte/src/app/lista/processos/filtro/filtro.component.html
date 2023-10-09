@@ -1,0 +1,18 @@
+<nav class="wrap top-padding medium-width m l">
+  <label class="large-text">Filtrar Por:</label>
+  <a id="todos" (click)="changeFilter('todos')" class="chip primary">
+    <span>Todos</span>
+  </a>
+  <a id="corte" (click)="changeFilter('corte')" class="chip">
+    <span>Corte</span>
+  </a>
+  <a id="desenho" (click)="changeFilter('desenho')" class="chip">
+    <span>Desenho</span>
+  </a>
+</nav>
+
+<div class="s tabs">
+  <a class="active" data-ui="#todos" (click)="changeFilter('todos')"> Todos</a>
+  <a data-ui="#corte" (click)="changeFilter('corte')"> Corte </a>
+  <a data-ui="#desenho" (click)="changeFilter('desenho')"> Desenho </a>
+</div>
