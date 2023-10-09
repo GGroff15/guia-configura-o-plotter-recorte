@@ -1,8 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
-@import "https://cdn.jsdelivr.net/npm/beercss@3.4.0/dist/cdn/beer.min.css";
-
 @import url(assets/theme.css);
+@import "~materialize-css/dist/css/materialize.min.css";
+@import "~material-icons/iconfont/material-icons.css";
 
 body {
-    height: 100%;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
 }
