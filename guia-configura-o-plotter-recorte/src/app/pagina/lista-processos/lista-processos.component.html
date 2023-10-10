@@ -1,4 +1,52 @@
 <h1>Processos</h1>
 <div class="row">
-    <app-filtro-tipo-processo class="s12 m6 l6"></app-filtro-tipo-processo>
+  <app-filtro-tipo-processo class="s12 m6 l6"></app-filtro-tipo-processo>
 </div>
+<ul class="collapsible popout">
+  <li *ngFor="let processo of processos">
+    <div class="collapsible-header row">
+      <div class="col m4 l4 center">
+        <p>
+          <strong>{{ processo.materialDto.nome }}</strong>
+        </p>
+      </div>
+      <div class="col m4 l4 center">
+        <p>
+          <strong>{{ processo.materialDto.gramatura }} gramas</strong>
+        </p>
+      </div>
+      <div class="col m4 l4 center">
+        <p>
+          <strong>{{ processo.tipo }}</strong>
+        </p>
+      </div>
+    </div>
+    <div class="collapsible-body row container">
+      <div class="col m6 l6">
+        <p>
+          <strong>Tapete: </strong> {{ processo.tapeteDto.cor }} -
+          {{ processo.tapeteDto.forcaAderencia }}
+        </p>
+        <p>
+          <strong>Pressão ferramenta: </strong> {{ processo.pressaoFerramenta }}
+        </p>
+        <p><strong>Tecido: </strong> {{ processo.tecido }}</p>
+      </div>
+      <div *ngIf="processo.tipo === 'Corte'" class="col m6 l6">
+        <p>
+          <strong>Cor da Lâmina: </strong> {{ processo.laminaDto.cor }} -
+          {{ processo.laminaDto.tipoCorte }}
+        </p>
+        <p>
+          <strong>Profundidade da Lâmina: </strong>
+          {{ processo.profundidadeLamina }}
+        </p>
+      </div>
+      <div *ngIf="processo.tipo === 'Desenho'" class="col m6 l6">
+        <p>
+          <strong>Espessura Caneta: </strong> {{ processo.canetaDto.espessura }}mm
+        </p>
+      </div>
+    </div>
+  </li>
+</ul>
