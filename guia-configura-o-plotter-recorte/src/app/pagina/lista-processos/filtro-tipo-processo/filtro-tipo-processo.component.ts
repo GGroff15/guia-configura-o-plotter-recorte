@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class FiltroTipoProcessoComponent {
 
+  selectedFilter: string;
+
+  constructor() {
+    this.selectedFilter = 'Todos';
+  }
+
+  filterChange(opcao: string) {
+    console.log(opcao);
+    this.selectedFilter = opcao;
+  }
+
 }

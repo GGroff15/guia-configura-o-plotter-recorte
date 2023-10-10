@@ -1,1 +1,29 @@
-<p>filtro-tipo-processo works!</p>
+<label class="filter-label">Filtrar por:</label>
+<label
+  ><input
+    type="radio"
+    name="filtro"
+    class="with-gap"
+    value="Todos"
+    [(ngModel)]="selectedFilter"
+    (click)="filterChange('Todos')"
+  /><span> Todos </span></label
+><label
+  ><input
+    type="radio"
+    name="filtro"
+    class="with-gap"
+    value="Corte"
+    [(ngModel)]="selectedFilter"
+    (click)="filterChange('Corte')"
+  /><span> Corte </span></label
+><label
+  ><input
+    type="radio"
+    name="filtro"
+    class="with-gap"
+    value="Desenho"
+    [(ngModel)]="selectedFilter"
+    (click)="filterChange('Desenho')"
+  /><span> Desenho </span></label
+>
