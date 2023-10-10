@@ -8,6 +8,7 @@ import { ListaProcessosComponent } from './pagina/lista-processos/lista-processo
 import { AppRoutingModule } from './app-routing.module';
 import { FiltroTipoProcessoComponent } from './pagina/lista-processos/filtro-tipo-processo/filtro-tipo-processo.component';
 import { FormsModule } from '@angular/forms';
+import { ItemProcessoComponent } from './pagina/lista-processos/item-processo/item-processo.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     BarraSuperiorComponent,
     BarraInferiorComponent,
     ListaProcessosComponent,
-    FiltroTipoProcessoComponent
+    FiltroTipoProcessoComponent,
+    ItemProcessoComponent
   ],
   imports: [
     BrowserModule,
