@@ -62,7 +62,7 @@ const processo1: ProcessoDto = {
   tapeteDto: tapete1,
   canetaDto: caneta1,
   pressaoFerramenta: 10,
-  tipo: 'corte',
+  tipo: 'Corte',
   laminaDto: lamina1,
   profundidadeLamina: 5,
   tecido: true,
@@ -74,7 +74,7 @@ const processo2: ProcessoDto = {
   tapeteDto: tapete2,
   canetaDto: caneta2,
   pressaoFerramenta: 15,
-  tipo: 'desenho',
+  tipo: 'Desenho',
   laminaDto: lamina2,
   profundidadeLamina: 7,
   tecido: false,
@@ -92,7 +92,7 @@ export class ProcessoService {
   }
 
   listar(filtro: string): ProcessoDto[] {
-    if (filtro === 'todos') {
+    if (filtro === 'Todos') {
       return this.processos;
     }
     return this.processos.filter(processo => processo.tipo === filtro);
