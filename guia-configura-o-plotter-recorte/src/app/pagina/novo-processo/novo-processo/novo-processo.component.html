@@ -62,15 +62,19 @@
   </div>
 
   <div>
+    <label for="tipo-caneta">Caneta</label>
     <div class="input-field col s12">
-      <select name="tipo-caneta" id="tipo-caneta">
-        <option value="" disabled selected>Selecione uma caneta</option>
-        <option value="1">Verde</option>
-        <option value="2">Azul</option>
-        <option value="3">Vermelho</option>
-        <option value="4">Preto</option>
+      <select
+        name="tipo-caneta"
+        id="tipo-caneta"
+        [(ngModel)]="canetaSelecionada"
+        class="browser-default"
+      >
+        <option [value]="" disabled selected>Selecione uma caneta</option>
+        <option *ngFor="let caneta of canetas" [value]="caneta.codigo">
+          {{ caneta.espessura }}mm
+        </option>
       </select>
-      <label for="tipo-caneta">Caneta</label>
     </div>
   </div>
 </form>
