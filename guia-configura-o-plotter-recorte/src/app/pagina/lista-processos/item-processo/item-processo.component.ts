@@ -1,6 +1,6 @@
+import { ListaProcessosService } from './../lista-processos.service';
 import { Component } from '@angular/core';
 import { ProcessoDto } from 'src/app/model/processo-dto';
-import { ProcessoService } from 'src/app/services/processo.service';
 
 @Component({
   selector: 'app-item-processo',
@@ -9,15 +9,19 @@ import { ProcessoService } from 'src/app/services/processo.service';
 })
 export class ItemProcessoComponent {
 
-  processos: ProcessoDto[];
+  filtro: string = 'Todos';
+  processos!: ProcessoDto[];
 
-  constructor(private service : ProcessoService) {
-    this.processos = service.listar('Todos');
-    console.log(this.processos);
+  constructor(private listaProcessosService: ListaProcessosService) {
   }
+
   ngOnInit(): void {
     const collapsible = document.querySelectorAll('.collapsible');
     M.Collapsible.init(collapsible);
+
+    this.listaProcessosService.getListaProcessos().subscribe((processos) => {
+      this.processos = processos;
+    });
   }
 
 }

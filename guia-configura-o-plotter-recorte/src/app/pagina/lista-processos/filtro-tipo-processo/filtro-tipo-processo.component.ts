@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ListaProcessosService } from '../lista-processos.service';
 
 @Component({
   selector: 'app-filtro-tipo-processo',
@@ -9,13 +10,13 @@ export class FiltroTipoProcessoComponent {
 
   selectedFilter: string;
 
-  constructor() {
+  constructor(private service: ListaProcessosService) {
     this.selectedFilter = 'Todos';
   }
 
   filterChange(opcao: string) {
-    console.log(opcao);
     this.selectedFilter = opcao;
+    this.service.setFiltro(this.selectedFilter);
   }
 
 }
