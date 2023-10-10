@@ -6,12 +6,6 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit {
-  @ViewChild('mobile-nav-bar') sideNav?: ElementRef;
-  
+export class AppComponent {
   title = 'guia-configura-o-plotter-recorte';
-  
-  ngAfterViewInit(): void {
-    M.Sidenav.init(this.sideNav?.nativeElement);
-  }
 }
