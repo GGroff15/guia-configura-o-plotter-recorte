@@ -1,1 +1,76 @@
-<p>novo-processo works!</p>
+<h1>Novo Processo</h1>
+
+<form action="" method="post">
+  <button type="submit">Salvar</button>
+
+  <div class="input-field col s12">
+    <select name="material" id="material">
+      <option value="" disabled selected>Selecione um material</option>
+      <option value="1">Material A</option>
+      <option value="2">Material B</option>
+    </select>
+    <label for="material">Material:</label>
+  </div>
+
+  <div class="input-field col s12">
+    <select name="tapete" id="tapete">
+      <option value="" disabled selected>Selecione um tapete</option>
+      <option value="1">Tapete 1</option>
+      <option value="2">Tapete 2</option>
+    </select>
+    <label for="tapete">Tapete:</label>
+  </div>
+
+  <div class="input-field col s12">
+    <input id="pressao-ferramenta" type="number" />
+    <label for="pressao-ferramenta">Pressão Ferramenta:</label>
+  </div>
+
+  <h2>Processo</h2>
+  <label
+    ><input
+      type="radio"
+      name="tipo-processo"
+      class="with-gap"
+      value="Corte"
+    /><span>Corte</span></label
+  >
+  <label
+    ><input
+      type="radio"
+      name="tipo-processo"
+      class="with-gap"
+      value="Desenho"
+    /><span>Desenho</span></label
+  >
+
+  <div class="row">
+    <div class="input-field col s6">
+      <select name="tipo-lamina" id="tipo-lamina">
+        <option value="" disabled selected>Selecione uma lâmina</option>
+        <option value="1">Verde</option>
+        <option value="2">Azul</option>
+        <option value="3">Vermelho</option>
+        <option value="4">Preto</option>
+      </select>
+      <label for="tipo-lamina">Lâmina</label>
+    </div>
+    <div class="input-field col s6">
+      <input id="profundidade-lamina" type="number" />
+      <label for="profundidade-lamina">Profundidade Lâmina:</label>
+    </div>
+  </div>
+
+  <div>
+    <div class="input-field col s12">
+      <select name="tipo-caneta" id="tipo-caneta">
+        <option value="" disabled selected>Selecione uma caneta</option>
+        <option value="1">Verde</option>
+        <option value="2">Azul</option>
+        <option value="3">Vermelho</option>
+        <option value="4">Preto</option>
+      </select>
+      <label for="tipo-caneta">Caneta</label>
+    </div>
+  </div>
+</form>
