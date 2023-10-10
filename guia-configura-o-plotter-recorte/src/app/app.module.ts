@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { FiltroTipoProcessoComponent } from './pagina/lista-processos/filtro-tipo-processo/filtro-tipo-processo.component';
 import { FormsModule } from '@angular/forms';
 import { ItemProcessoComponent } from './pagina/lista-processos/item-processo/item-processo.component';
+import { AdicionarProcessoComponent } from './pagina/lista-processos/botao/adicionar-processo/adicionar-processo.component';
+import { NovoProcessoComponent } from './pagina/novo-processo/novo-processo/novo-processo.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ItemProcessoComponent } from './pagina/lista-processos/item-processo/it
     BarraInferiorComponent,
     ListaProcessosComponent,
     FiltroTipoProcessoComponent,
-    ItemProcessoComponent
+    ItemProcessoComponent,
+    AdicionarProcessoComponent,
+    NovoProcessoComponent
   ],
   imports: [
     BrowserModule,
