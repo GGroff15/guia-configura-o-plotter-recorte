@@ -10,4 +10,14 @@ import * as M from 'materialize-css';
 })
 export class ListaProcessosComponent {
 
+  selectedFilter: string;
+
+  constructor() {
+    this.selectedFilter = "";
+  }
+
+  onChangeFilter(selectedFilter: string) {
+    this.selectedFilter = selectedFilter;
+  }
+
 }
