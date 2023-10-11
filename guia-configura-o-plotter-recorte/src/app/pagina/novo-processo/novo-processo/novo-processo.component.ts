@@ -44,7 +44,8 @@ export class NovoProcessoComponent implements OnInit {
         laminaSelecionado: 'Selecione uma lâmina',
         profundidadeLamina: '',
         pressaoFerramenta: '',
-        tipoProcesso: 'Corte'
+        tipoProcesso: 'Corte',
+        tecido: false
     });
   }
 
@@ -54,6 +55,6 @@ export class NovoProcessoComponent implements OnInit {
   }
 
   getFormData(): AbstractControl<any, any> {
-    return this.formData.value;
+    return this.formData;
   }
 }

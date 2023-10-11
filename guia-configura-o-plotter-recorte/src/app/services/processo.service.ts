@@ -111,6 +111,16 @@ export class ProcessoService {
   }
 
   salver(processo: ProcessoDto) {
+
+    let maiorCodigo = 0;
+    for (let index = 0; index < this.processos.length; index++) {
+      const element = this.processos[index];
+      if (element.codigo > maiorCodigo) {
+        maiorCodigo = element.codigo;
+      }
+    }
+
+    processo.codigo = maiorCodigo++;
     this.processos.push(processo);
   }
 

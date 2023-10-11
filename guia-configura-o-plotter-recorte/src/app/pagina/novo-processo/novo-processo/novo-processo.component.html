@@ -1,7 +1,6 @@
 <h4>Novo Processo</h4>
 
 <form [formGroup]="formData">
-
   <div>
     <label for="material">Material:</label>
     <div class="input-field col s12">
@@ -21,22 +20,25 @@
 
   <div>
     <label for="tapete">Tapete:</label>
-      <select
-        name="tapete"
-        id="tapete"
-        class="browser-default"
-        formControlName="tapeteSelecionado"
-      >
-        <option [value]="" disabled selected>Selecione um tapete</option>
-        <option *ngFor="let tapete of tapetes" [value]="tapete.codigo">
-          {{ tapete.cor }} - {{ tapete.forcaAderencia }}
-        </option>
-      </select>
+    <select
+      name="tapete"
+      id="tapete"
+      class="browser-default"
+      formControlName="tapeteSelecionado"
+    >
+      <option [value]="" disabled selected>Selecione um tapete</option>
+      <option *ngFor="let tapete of tapetes" [value]="tapete.codigo">
+        {{ tapete.cor }} - {{ tapete.forcaAderencia }}
+      </option>
+    </select>
   </div>
 
   <div class="input-field col s12">
-    <input id="pressao-ferramenta" type="number" 
-    formControlName="pressaoFerramenta"/>
+    <input
+      id="pressao-ferramenta"
+      type="number"
+      formControlName="pressaoFerramenta"
+    />
     <label for="pressao-ferramenta">Pressão Ferramenta:</label>
   </div>
 
@@ -65,25 +67,28 @@
       <label for="tipo-lamina">Lâmina</label>
       <div class="input-field">
         <select
-        name="tipo-lamina"
-        id="tipo-lamina"
-        formControlName="laminaSelecionado"
-        class="browser-default"
+          name="tipo-lamina"
+          id="tipo-lamina"
+          formControlName="laminaSelecionado"
+          class="browser-default"
         >
-        <option [value]="" disabled selected>Selecione uma lâmina</option>
-        <option *ngFor="let lamina of laminas" [value]="lamina.codigo">
-          {{ lamina.cor }} - {{ lamina.tipoCorte }}
-        </option>
-      </select>
+          <option [value]="" disabled selected>Selecione uma lâmina</option>
+          <option *ngFor="let lamina of laminas" [value]="lamina.codigo">
+            {{ lamina.cor }} - {{ lamina.tipoCorte }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="input-field col s12">
+      <input
+        id="profundidade-lamina"
+        type="number"
+        formControlName="profundidadeLamina"
+      />
+      <label for="profundidade-lamina">Profundidade Lâmina:</label>
     </div>
   </div>
-  <div class="input-field col s12">
-    <input id="profundidade-lamina" type="number"
-    formControlName="profundidadeLamina"/>
-    <label for="profundidade-lamina">Profundidade Lâmina:</label>
-  </div>
-</div>
-  
+
   <div *ngIf="formData.get('tipoProcesso')?.value === 'Desenho'">
     <label for="tipo-caneta">Caneta</label>
     <div class="input-field col s12">
@@ -99,5 +104,13 @@
         </option>
       </select>
     </div>
+  </div>
+
+  <div>
+    <label>
+      <input type="checkbox"
+      formControlName="tecido"/>
+      <span>Tecido</span>
+    </label>
   </div>
 </form>
