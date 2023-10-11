@@ -7,10 +7,11 @@ import { BarraInferiorComponent } from './barra-inferior/barra-inferior.componen
 import { ListaProcessosComponent } from './pagina/lista-processos/lista-processos.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FiltroTipoProcessoComponent } from './pagina/lista-processos/filtro-tipo-processo/filtro-tipo-processo.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ItemProcessoComponent } from './pagina/lista-processos/item-processo/item-processo.component';
 import { AdicionarProcessoComponent } from './pagina/lista-processos/botao/adicionar-processo/adicionar-processo.component';
 import { NovoProcessoComponent } from './pagina/novo-processo/novo-processo/novo-processo.component';
+import { ModalComponent } from './pagina/lista-processos/item-processo/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,14 @@ import { NovoProcessoComponent } from './pagina/novo-processo/novo-processo/novo
     FiltroTipoProcessoComponent,
     ItemProcessoComponent,
     AdicionarProcessoComponent,
-    NovoProcessoComponent
+    NovoProcessoComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

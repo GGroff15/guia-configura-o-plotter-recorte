@@ -11,10 +11,13 @@
             <strong>{{ processo.materialDto.gramatura }} gramas</strong>
           </p>
         </div>
-        <div class="col m4 l4 center">
+        <div class="col m3 l3 center">
           <p>
             <strong>{{ processo.tipo }}</strong>
           </p>
+        </div>
+        <div class="col m1 l1 center valign-wrapper">
+          <a href="#modal1" (click)="openModal()" class="center"><i class="material-icons center">more_vert</i></a>
         </div>
       </div>
       <div class="collapsible-body row container">

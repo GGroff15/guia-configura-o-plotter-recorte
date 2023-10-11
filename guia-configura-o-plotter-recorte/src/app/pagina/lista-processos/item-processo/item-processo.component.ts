@@ -1,6 +1,7 @@
 import { ListaProcessosService } from './../lista-processos.service';
 import { Component } from '@angular/core';
 import { ProcessoDto } from 'src/app/model/processo-dto';
+import { ModalService } from './modal.service';
 
 @Component({
   selector: 'app-item-processo',
@@ -12,7 +13,7 @@ export class ItemProcessoComponent {
   filtro: string = 'Todos';
   processos!: ProcessoDto[];
 
-  constructor(private listaProcessosService: ListaProcessosService) {
+  constructor(private listaProcessosService: ListaProcessosService, private modalService: ModalService) {
   }
 
   ngOnInit(): void {
@@ -22,6 +23,10 @@ export class ItemProcessoComponent {
     this.listaProcessosService.getListaProcessos().subscribe((processos) => {
       this.processos = processos;
     });
+  }
+
+  openModal() {
+    this.modalService.openModal();
   }
 
 }
