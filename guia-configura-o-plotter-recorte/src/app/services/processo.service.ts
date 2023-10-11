@@ -1,8 +1,8 @@
+import { ProcessoDto } from '../model/processo-dto';
 import { CanetaDto } from '../model/caneta-dto';
 import { LaminaDto } from '../model/lamina-dto';
 import { MaterialDto } from '../model/material-dto';
 import { TapeteDto } from '../model/tapete-dto';
-import { ProcessoDto } from './../model/processo-dto';
 import { Injectable } from '@angular/core';
 
 // Itens de exemplo para MaterialDto
@@ -55,6 +55,18 @@ const lamina2: LaminaDto = {
   tipoCorte: 'Grosso',
 };
 
+const processoDefault: ProcessoDto = {
+  codigo: 0,
+  materialDto: material1,
+  tapeteDto: tapete1,
+  canetaDto: caneta1,
+  pressaoFerramenta: 10,
+  tipo: '',
+  laminaDto: lamina1,
+  profundidadeLamina: 5,
+  tecido: false,
+};
+
 // Itens de exemplo para ProcessoDto
 const processo1: ProcessoDto = {
   codigo: 1001,
@@ -96,5 +108,19 @@ export class ProcessoService {
       return this.processos;
     }
     return this.processos.filter(processo => processo.tipo === filtro);
+  }
+
+  salver(processo: ProcessoDto) {
+    this.processos.push(processo);
+  }
+
+  obter(id: number): ProcessoDto {
+    for (let index = 0; index < this.processos.length; index++) {
+      const element = this.processos[index];
+      if (element.codigo === id) {
+        return element
+      }
+    }
+    return processoDefault;
   }
 }

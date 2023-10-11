@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { TapeteDto } from '../model/tapete-dto';
 
+const tapeteDefault: TapeteDto = {
+  codigo: 0,
+  cor: '',
+  forcaAderencia: '',
+};
+
 // Itens de exemplo para TapeteDto
 const tapete1: TapeteDto = {
   codigo: 1,
@@ -27,5 +33,15 @@ export class TapetesService {
 
   listar(): TapeteDto[] {
     return this.tapetes;
+  }
+
+  obter(id: number) {
+    for (let index = 0; index < this.tapetes.length; index++) {
+      const element = this.tapetes[index];
+      if (element.codigo === id) {
+        return element
+      }
+    }
+    return tapeteDefault;
   }
 }

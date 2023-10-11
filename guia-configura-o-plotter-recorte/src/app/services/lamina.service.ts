@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { LaminaDto } from '../model/lamina-dto';
 
+const laminaDefault: LaminaDto = {
+  codigo: 0,
+  cor: '',
+  tipoCorte: '',
+};
+
 // Itens de exemplo para LaminaDto
 const lamina1: LaminaDto = {
   codigo: 1,
@@ -27,5 +33,15 @@ export class LaminaService {
 
   listar(): LaminaDto[] {
     return this.laminas;
+  }
+
+  obter(id: number): LaminaDto {
+    for (let index = 0; index < this.laminas.length; index++) {
+      const element = this.laminas[index];
+      if (element.codigo === id) {
+        return element;
+      }
+    }
+    return laminaDefault;
   }
 }

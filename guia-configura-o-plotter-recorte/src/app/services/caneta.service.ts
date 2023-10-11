@@ -1,5 +1,10 @@
+import { CanetaDto } from 'src/app/model/caneta-dto';
 import { Injectable } from '@angular/core';
-import { CanetaDto } from '../model/caneta-dto';
+
+const canetaDefault: CanetaDto = {
+  codigo: 0,
+  espessura: 0
+}
 
 // Itens de exemplo para CanetaDto
 const caneta1: CanetaDto = {
@@ -25,5 +30,15 @@ export class CanetaService {
 
   listar(): CanetaDto[] {
     return this.canetas;
+  }
+
+  obter(id: number): CanetaDto {
+    for (let index = 0; index < this.canetas.length; index++) {
+      const element = this.canetas[index];
+      if (element.codigo === id) {
+        return element;
+      }
+    }
+    return canetaDefault;
   }
 }
