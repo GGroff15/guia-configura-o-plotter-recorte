@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ItemMenuComponent } from './item-menu.component';
+import { ModalComponent } from './modal.component';
 
-describe('ItemMenuComponent', () => {
-  let component: ItemMenuComponent;
-  let fixture: ComponentFixture<ItemMenuComponent>;
+describe('ModalComponent', () => {
+  let component: ModalComponent;
+  let fixture: ComponentFixture<ModalComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ItemMenuComponent]
+      declarations: [ModalComponent]
     });
-    fixture = TestBed.createComponent(ItemMenuComponent);
+    fixture = TestBed.createComponent(ModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
