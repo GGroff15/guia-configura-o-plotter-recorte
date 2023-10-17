@@ -12,6 +12,7 @@ import { ItemProcessoComponent } from './pagina/lista-processos/item-processo/it
 import { AdicionarProcessoComponent } from './pagina/lista-processos/botao/adicionar-processo/adicionar-processo.component';
 import { NovoProcessoComponent } from './pagina/novo-processo/novo-processo/novo-processo.component';
 import { ModalComponent } from './pagina/lista-processos/item-processo/modal/modal.component';
+import { AdicionarProcessoFloatingComponent } from './pagina/lista-processos/botao/adicionar-processo-floating/adicionar-processo-floating.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ModalComponent } from './pagina/lista-processos/item-processo/modal/mod
     ItemProcessoComponent,
     AdicionarProcessoComponent,
     NovoProcessoComponent,
-    ModalComponent
+    ModalComponent,
+    AdicionarProcessoFloatingComponent
   ],
   imports: [
     BrowserModule,

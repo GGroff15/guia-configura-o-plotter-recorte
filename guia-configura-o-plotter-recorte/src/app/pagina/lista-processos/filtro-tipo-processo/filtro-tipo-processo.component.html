@@ -1,29 +1,64 @@
-<label class="filter-label">Filtrar por:</label>
-<label
-  ><input
+<div class="hide-on-small-only inline">
+  <label class="filter-label">Filtrar por:</label>
+  <label
+    ><input
+      type="radio"
+      name="filtro"
+      class="with-gap"
+      value="Todos"
+      [(ngModel)]="selectedFilter"
+      (click)="filterChange('Todos')"
+    /><span> Todos </span></label
+  ><label
+    ><input
+      type="radio"
+      name="filtro"
+      class="with-gap"
+      value="Corte"
+      [(ngModel)]="selectedFilter"
+      (click)="filterChange('Corte')"
+    /><span> Corte </span></label
+  ><label
+    ><input
+      type="radio"
+      name="filtro"
+      class="with-gap"
+      value="Desenho"
+      [(ngModel)]="selectedFilter"
+      (click)="filterChange('Desenho')"
+    /><span> Desenho </span></label
+  >
+</div>
+<div class="hide-on-med-and-up center">
+  <label class="filter-label">Filtrar por:</label>
+  <div class="">
+    <label
+    ><input
     type="radio"
     name="filtro"
     class="with-gap"
     value="Todos"
     [(ngModel)]="selectedFilter"
     (click)="filterChange('Todos')"
-  /><span> Todos </span></label
-><label
-  ><input
+    /><span> Todos </span></label
+    ><label
+    ><input
     type="radio"
     name="filtro"
     class="with-gap"
     value="Corte"
     [(ngModel)]="selectedFilter"
     (click)="filterChange('Corte')"
-  /><span> Corte </span></label
-><label
-  ><input
+    /><span> Corte </span></label
+    ><label
+    ><input
     type="radio"
     name="filtro"
     class="with-gap"
     value="Desenho"
     [(ngModel)]="selectedFilter"
     (click)="filterChange('Desenho')"
-  /><span> Desenho </span></label
->
+    /><span> Desenho </span></label
+    >
+  </div>
+</div>
