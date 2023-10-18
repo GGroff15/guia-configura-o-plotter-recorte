@@ -8,11 +8,12 @@ import { ListaProcessosComponent } from './pagina/lista-processos/lista-processo
 import { AppRoutingModule } from './app-routing.module';
 import { FiltroTipoProcessoComponent } from './pagina/lista-processos/filtro-tipo-processo/filtro-tipo-processo.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ItemProcessoComponent } from './pagina/lista-processos/item-processo/item-processo.component';
+import { ItensProcessoComponent } from './pagina/lista-processos/item-processo/itens-processo.component';
 import { AdicionarProcessoComponent } from './pagina/lista-processos/botao/adicionar-processo/adicionar-processo.component';
 import { NovoProcessoComponent } from './pagina/novo-processo/novo-processo/novo-processo.component';
 import { ModalComponent } from './pagina/lista-processos/item-processo/modal/modal.component';
 import { AdicionarProcessoFloatingComponent } from './pagina/lista-processos/botao/adicionar-processo-floating/adicionar-processo-floating.component';
+import { EditarProcessoComponent } from './pagina/editar-processo/editar-processo.component';
 
 @NgModule({
   declarations: [
@@ -21,11 +22,12 @@ import { AdicionarProcessoFloatingComponent } from './pagina/lista-processos/bot
     BarraInferiorComponent,
     ListaProcessosComponent,
     FiltroTipoProcessoComponent,
-    ItemProcessoComponent,
+    ItensProcessoComponent,
     AdicionarProcessoComponent,
     NovoProcessoComponent,
     ModalComponent,
-    AdicionarProcessoFloatingComponent
+    AdicionarProcessoFloatingComponent,
+    EditarProcessoComponent
   ],
   imports: [
     BrowserModule,

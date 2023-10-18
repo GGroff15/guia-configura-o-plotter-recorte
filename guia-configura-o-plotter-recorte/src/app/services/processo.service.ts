@@ -125,9 +125,11 @@ export class ProcessoService {
   }
 
   obter(id: number): ProcessoDto {
+    console.log('Id processo: ', id);
     for (let index = 0; index < this.processos.length; index++) {
       const element = this.processos[index];
-      if (element.codigo === id) {
+      if (element.codigo == id) {
+        console.log("Processo encontrado: ", element);
         return element
       }
     }
