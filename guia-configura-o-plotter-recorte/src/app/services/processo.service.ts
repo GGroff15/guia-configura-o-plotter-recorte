@@ -120,19 +120,29 @@ export class ProcessoService {
       }
     }
 
-    processo.codigo = maiorCodigo++;
+    processo.codigo = maiorCodigo+1;
     this.processos.push(processo);
   }
 
   obter(id: number): ProcessoDto {
-    console.log('Id processo: ', id);
     for (let index = 0; index < this.processos.length; index++) {
       const element = this.processos[index];
       if (element.codigo == id) {
-        console.log("Processo encontrado: ", element);
         return element
       }
     }
     return processoDefault;
+  }
+
+  remover(id: number) {
+    console.log('Id do processo a ser removido: ', id);
+    for (let index = 0; index < this.processos.length; index++) {
+      const element = this.processos[index];
+      if (element.codigo == id) {
+        console.log('Processo a ser removido: ', element);
+        this.processos.splice(index, 1);
+        console.log('lista restantte: ', this.processos);
+      }
+    }
   }
 }
