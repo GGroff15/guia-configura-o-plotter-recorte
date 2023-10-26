@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import * as M from 'materialize-css';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',

@@ -1,0 +1,11 @@
+label {
+    padding-right: 10px;
+}
+
+.filter-label {
+    font-size: 1rem;
+}
+
+.inline {
+    display: inline;
+}
