@@ -21,20 +21,17 @@ const caneta2: CanetaDto = {
   providedIn: 'root'
 })
 export class CanetaService {
+  
+  private canetas: CanetaDto[];
 
   remover(id: number) {
-    console.log('Id do processo a ser removido: ', id);
     for (let index = 0; index < this.canetas.length; index++) {
       const element = this.canetas[index];
       if (element.codigo == id) {
-        console.log('Processo a ser removido: ', element);
         this.canetas.splice(index, 1);
-        console.log('lista restantte: ', this.canetas);
       }
     }
   }
-  
-  private canetas: CanetaDto[];
 
   constructor() {
     this.canetas = [caneta1, caneta2];
