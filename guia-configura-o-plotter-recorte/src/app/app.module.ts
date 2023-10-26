@@ -18,6 +18,10 @@ import { ListaCanetasComponent } from './pagina/caneta/lista-canetas/lista-canet
 import { ItensCanetaComponent } from './pagina/caneta/lista-canetas/itens-caneta/itens-caneta.component';
 import { NovaCanetaComponent } from './pagina/caneta/nova-caneta/nova-caneta.component';
 import { EditarCanetaComponent } from './pagina/caneta/editar-caneta/editar-caneta.component';
+import { ListaLaminasComponent } from './pagina/lamina/lista-laminas/lista-laminas.component';
+import { NovaLaminaComponent } from './pagina/lamina/nova-lamina/nova-lamina.component';
+import { ItensLaminaComponent } from './pagina/lamina/lista-laminas/itens-lamina/itens-lamina.component';
+import { EditerLaminaComponent } from './pagina/lamina/editer-lamina/editer-lamina.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,11 @@ import { EditarCanetaComponent } from './pagina/caneta/editar-caneta/editar-cane
     ListaCanetasComponent,
     ItensCanetaComponent,
     NovaCanetaComponent,
-    EditarCanetaComponent
+    EditarCanetaComponent,
+    ListaLaminasComponent,
+    NovaLaminaComponent,
+    ItensLaminaComponent,
+    EditerLaminaComponent
   ],
   imports: [
     BrowserModule,

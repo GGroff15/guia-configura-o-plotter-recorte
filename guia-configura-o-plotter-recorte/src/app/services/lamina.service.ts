@@ -24,7 +24,7 @@ const lamina2: LaminaDto = {
   providedIn: 'root'
 })
 export class LaminaService {
-
+  
   private laminas: LaminaDto[];
 
   constructor() {
@@ -38,10 +38,19 @@ export class LaminaService {
   obter(id: number): LaminaDto {
     for (let index = 0; index < this.laminas.length; index++) {
       const element = this.laminas[index];
-      if (element.codigo === id) {
+      if (element.codigo == id) {
         return element;
       }
     }
     return laminaDefault;
+  }
+
+  remover(id: number) {
+    for (let index = 0; index < this.laminas.length; index++) {
+      const element = this.laminas[index];
+      if (element.codigo == id) {
+        this.laminas.splice(index, 1);
+      }
+    }
   }
 }

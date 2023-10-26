@@ -1,16 +1,21 @@
 <ul class="collapsible popout">
-  <li class="initialize-dropdown" *ngFor="let caneta of canetas">
+  <li class="initialize-dropdown" *ngFor="let lamina of laminas">
     <div class="collapsible-header row">
-      <div class="col s11 center">
+      <div class="col s6 center">
         <p>
-          <strong>{{ caneta.espessura }}mm</strong>
+          <strong>{{ lamina.cor }}</strong>
+        </p>
+      </div>
+      <div class="col s5 center">
+        <p>
+          <strong>{{ lamina.tipoCorte }}</strong>
         </p>
       </div>
       <div class="col s1 m1 l1 center valign-wrapper">
         <a
           class="dropdown-trigger"
           data-target="menu"
-          (click)="openDropdown(caneta)"
+          (click)="openDropdown(lamina)"
           ><i class="material-icons center">more_vert</i></a
         >
       </div>
