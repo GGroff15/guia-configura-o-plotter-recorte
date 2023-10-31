@@ -5,7 +5,7 @@
     <div class="col s12 m6 l6">
       <h5>Base</h5>
       <div>
-        <label for="material">Material:</label>
+        <label for="material">Material: *</label>
         <div class="input-field col s12">
           <select
             name="material"
@@ -25,7 +25,7 @@
       </div>
 
       <div>
-        <label for="tapete">Tapete:</label>
+        <label for="tapete">Tapete: *</label>
         <div class="input-field col s12">
         <select
           name="tapete"
@@ -47,7 +47,7 @@
           type="number"
           formControlName="pressaoFerramenta"
         />
-        <label for="pressao-ferramenta">Pressão Ferramenta:</label>
+        <label for="pressao-ferramenta">Pressão Ferramenta: *</label>
       </div>
     </div>
 
@@ -75,7 +75,7 @@
 
       <div *ngIf="formData.get('tipoProcesso')?.value === 'Corte'">
         <div class="col s12">
-          <label for="tipo-lamina">Lâmina</label>
+          <label for="tipo-lamina">Lâmina *</label>
           <div class="input-field col s12">
             <select
               name="tipo-lamina"
@@ -96,7 +96,7 @@
             type="number"
             formControlName="profundidadeLamina"
           />
-          <label for="profundidade-lamina">Profundidade Lâmina:</label>
+          <label for="profundidade-lamina">Profundidade Lâmina: *</label>
         </div>
       </div>
 
@@ -109,7 +109,7 @@
             formControlName="canetaSelecionada"
             class="browser-default"
           >
-            <option [value]="" disabled selected>Selecione uma caneta</option>
+            <option [value]="" disabled selected>Selecione uma caneta *</option>
             <option *ngFor="let caneta of canetas" [value]="caneta.codigo">
               {{ caneta.espessura }}mm
             </option>
