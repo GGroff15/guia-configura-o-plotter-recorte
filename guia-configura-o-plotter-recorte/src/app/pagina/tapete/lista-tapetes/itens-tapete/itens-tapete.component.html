@@ -1,0 +1,30 @@
+<ul class="collapsible popout">
+    <li class="initialize-dropdown" *ngFor="let tapete of tapetes">
+      <div class="collapsible-header row">
+        <div class="col s6 center">
+          <p>
+            <strong>Cor: </strong>{{ tapete.cor }}
+          </p>
+        </div>
+        <div class="col s5 center">
+          <p>
+            <strong>Força de Aderencia: </strong>{{ tapete.forcaAderencia }}
+          </p>
+        </div>
+        <div class="col s1 m1 l1 center valign-wrapper">
+          <a
+            class="dropdown-trigger"
+            data-target="menu"
+            (click)="openDropdown(tapete)"
+            ><i class="material-icons center">more_vert</i></a
+          >
+        </div>
+      </div>
+    </li>
+  </ul>
+  
+  <ul id="menu" class="dropdown-content">
+    <li><a (click)="navegarParaEdicao()">Editar</a></li>
+    <li><a (click)="remover()">Excluir</a></li>
+  </ul>
+  

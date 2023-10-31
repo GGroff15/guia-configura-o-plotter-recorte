@@ -22,6 +22,10 @@ import { ListaLaminasComponent } from './pagina/lamina/lista-laminas/lista-lamin
 import { NovaLaminaComponent } from './pagina/lamina/nova-lamina/nova-lamina.component';
 import { ItensLaminaComponent } from './pagina/lamina/lista-laminas/itens-lamina/itens-lamina.component';
 import { EditerLaminaComponent } from './pagina/lamina/editer-lamina/editer-lamina.component';
+import { ListaTapetesComponent } from './pagina/tapete/lista-tapetes/lista-tapetes.component';
+import { ItensTapeteComponent } from './pagina/tapete/lista-tapetes/itens-tapete/itens-tapete.component';
+import { EditarTapeteComponent } from './pagina/tapete/editar-tapete/editar-tapete.component';
+import { NovoTapeteComponent } from './pagina/tapete/novo-tapete/novo-tapete.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,11 @@ import { EditerLaminaComponent } from './pagina/lamina/editer-lamina/editer-lami
     ListaLaminasComponent,
     NovaLaminaComponent,
     ItensLaminaComponent,
-    EditerLaminaComponent
+    EditerLaminaComponent,
+    ListaTapetesComponent,
+    ItensTapeteComponent,
+    EditarTapeteComponent,
+    NovoTapeteComponent
   ],
   imports: [
     BrowserModule,
