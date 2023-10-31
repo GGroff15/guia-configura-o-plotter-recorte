@@ -25,6 +25,7 @@ const lamina2: LaminaDto = {
 })
 export class LaminaService {
   
+  
   private laminas: LaminaDto[];
 
   constructor() {
@@ -52,5 +53,18 @@ export class LaminaService {
         this.laminas.splice(index, 1);
       }
     }
+  }
+
+  salvar(lamina: LaminaDto) {
+    let maiorCodigo = 0;
+    for (let index = 0; index < this.laminas.length; index++) {
+      const element = this.laminas[index];
+      if (element.codigo > maiorCodigo) {
+        maiorCodigo = element.codigo;
+      }
+    }
+
+    lamina.codigo = maiorCodigo+1;
+    this.laminas.push(lamina);
   }
 }

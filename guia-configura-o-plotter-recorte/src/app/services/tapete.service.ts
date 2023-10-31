@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TapeteDto } from '../model/tapete-dto';
+import { LaminaDto } from '../model/lamina-dto';
 
 const tapeteDefault: TapeteDto = {
   codigo: 0,
@@ -24,7 +25,7 @@ const tapete2: TapeteDto = {
   providedIn: 'root'
 })
 export class TapetesService {
-
+  
   private tapetes: TapeteDto[];
 
   constructor() {
@@ -38,10 +39,32 @@ export class TapetesService {
   obter(id: number) {
     for (let index = 0; index < this.tapetes.length; index++) {
       const element = this.tapetes[index];
-      if (element.codigo === id) {
+      if (element.codigo == id) {
         return element
       }
     }
     return tapeteDefault;
+  }
+
+  remover(id: number) {
+    for (let index = 0; index < this.tapetes.length; index++) {
+      const element = this.tapetes[index];
+      if (element.codigo == id) {
+        this.tapetes.splice(index, 1);
+      }
+    }
+  }
+
+  salvar(tapete: TapeteDto) {
+    let maiorCodigo = 0;
+    for (let index = 0; index < this.tapetes.length; index++) {
+      const element = this.tapetes[index];
+      if (element.codigo > maiorCodigo) {
+        maiorCodigo = element.codigo;
+      }
+    }
+
+    tapete.codigo = maiorCodigo+1;
+    this.tapetes.push(tapete);
   }
 }
