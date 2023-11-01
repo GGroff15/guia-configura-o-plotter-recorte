@@ -1,40 +1,21 @@
 import { CanetaDto } from 'src/app/model/caneta-dto';
 import { Injectable } from '@angular/core';
+import { WebStorageUtil } from '../utils/webStorageUtils';
+import { Constants } from '../utils/constantes';
 
 const canetaDefault: CanetaDto = {
   codigo: 0,
-  espessura: 0
-}
-
-// Itens de exemplo para CanetaDto
-const caneta1: CanetaDto = {
-  codigo: 1,
-  espessura: 0.5,
-};
-
-const caneta2: CanetaDto = {
-  codigo: 2,
-  espessura: 0.7,
+  espessura: 0,
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CanetaService {
-  
   private canetas: CanetaDto[];
 
-  remover(id: number) {
-    for (let index = 0; index < this.canetas.length; index++) {
-      const element = this.canetas[index];
-      if (element.codigo == id) {
-        this.canetas.splice(index, 1);
-      }
-    }
-  }
-
   constructor() {
-    this.canetas = [caneta1, caneta2];
+    this.canetas = WebStorageUtil.get(Constants.CANETA_KEY);
   }
 
   listar(): CanetaDto[] {
@@ -51,6 +32,16 @@ export class CanetaService {
     return canetaDefault;
   }
 
+  remover(id: number) {
+    for (let index = 0; index < this.canetas.length; index++) {
+      const element = this.canetas[index];
+      if (element.codigo == id) {
+        this.canetas.splice(index, 1);
+      }
+    }
+    WebStorageUtil.set(Constants.CANETA_KEY, this.canetas);
+  }
+
   salvar(caneta: CanetaDto) {
     let maiorCodigo = 0;
     for (let index = 0; index < this.canetas.length; index++) {
@@ -60,7 +51,9 @@ export class CanetaService {
       }
     }
 
-    caneta.codigo = maiorCodigo+1;
+    caneta.codigo = maiorCodigo + 1;
     this.canetas.push(caneta);
+
+    WebStorageUtil.set(Constants.CANETA_KEY, this.canetas);
   }
 }

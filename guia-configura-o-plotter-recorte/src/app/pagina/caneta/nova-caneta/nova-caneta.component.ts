@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CanetaDto } from 'src/app/model/caneta-dto';
 import { CanetaService } from 'src/app/services/caneta.service';
 
@@ -16,8 +16,12 @@ export class NovaCanetaComponent {
     private service: CanetaService
   ) {
     this.formData = this.formBuilder.group({
-      espessura: '',
+      espessura: ['', [Validators.required]],
     });
+  }
+
+  getValidForm() {
+    return this.formData.valid;
   }
 
   salvar() {

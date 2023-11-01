@@ -8,12 +8,12 @@
         <label for="material">Material: *</label>
         <div class="input-field col s12">
           <select
-            name="material"
             id="material"
+            name="material"
             class="browser-default"
             formControlName="materialSelecionado"
           >
-            <option [value]="" disabled selected>Selecione um material</option>
+            <option disabled selected>Selecione um material</option>
             <option
               *ngFor="let material of materiais"
               [value]="material.codigo"
@@ -21,23 +21,40 @@
               {{ material.nome }} - {{ material.gramatura }} gramas
             </option>
           </select>
+          <span
+            class="red-text"
+            *ngIf="
+              this.formData.controls.materialSelecionado.errors?.required &&
+              this.formData.controls.materialSelecionado.touched
+            "
+          >
+            É obrigatório escolher um material
+          </span>
         </div>
       </div>
 
       <div>
         <label for="tapete">Tapete: *</label>
         <div class="input-field col s12">
-        <select
-          name="tapete"
-          id="tapete"
-          class="browser-default"
-          formControlName="tapeteSelecionado"
-        >
-          <option [value]="" disabled selected>Selecione um tapete</option>
-          <option *ngFor="let tapete of tapetes" [value]="tapete.codigo">
-            {{ tapete.cor }} - {{ tapete.forcaAderencia }}
-          </option>
-        </select>
+          <select
+            name="tapete"
+            id="tapete"
+            class="browser-default"
+            formControlName="tapeteSelecionado"
+          >
+            <option *ngFor="let tapete of tapetes" [value]="tapete.codigo">
+              {{ tapete.cor }} - {{ tapete.forcaAderencia }}
+            </option>
+          </select>
+          <span
+            class="red-text"
+            *ngIf="
+              this.formData.controls.tapeteSelecionado.errors?.required &&
+              this.formData.controls.tapeteSelecionado.touched
+            "
+          >
+            É obrigatório escolher um tapete
+          </span>
         </div>
       </div>
 
@@ -49,8 +66,16 @@
         />
         <label for="pressao-ferramenta">Pressão Ferramenta: *</label>
       </div>
+      <span
+        class="red-text"
+        *ngIf="
+          this.formData.controls.pressaoFerramenta.errors?.required &&
+          this.formData.controls.pressaoFerramenta.touched
+        "
+      >
+        É obrigatório informar a pressão da ferramenta
+      </span>
     </div>
-
 
     <div class="col s12 m6 l6">
       <h5>Processo</h5>
@@ -88,6 +113,15 @@
                 {{ lamina.cor }} - {{ lamina.tipoCorte }}
               </option>
             </select>
+            <span
+              class="red-text"
+              *ngIf="
+                this.formData.controls.laminaSelecionado.errors?.required &&
+                this.formData.controls.laminaSelecionado.touched
+              "
+            >
+              É obrigatório escolher uma lâmina
+            </span>
           </div>
         </div>
         <div class="input-field col s12">
@@ -98,22 +132,42 @@
           />
           <label for="profundidade-lamina">Profundidade Lâmina: *</label>
         </div>
+        <span
+          class="red-text"
+          *ngIf="
+            this.formData.controls.profundidadeLamina.errors?.required &&
+            this.formData.controls.profundidadeLamina.touched
+          "
+        >
+          É obrigatório informar a profundidade da lâmina
+        </span>
       </div>
 
       <div *ngIf="formData.get('tipoProcesso')?.value === 'Desenho'">
-        <label for="tipo-caneta">Caneta</label>
-        <div class="input-field col s12">
-          <select
-            name="tipo-caneta"
-            id="tipo-caneta"
-            formControlName="canetaSelecionada"
-            class="browser-default"
-          >
-            <option [value]="" disabled selected>Selecione uma caneta *</option>
-            <option *ngFor="let caneta of canetas" [value]="caneta.codigo">
-              {{ caneta.espessura }}mm
-            </option>
-          </select>
+        <div class="col s12">
+          <label for="tipo-caneta">Caneta *</label>
+          <div class="input-field col s12">
+            <select
+              name="tipo-caneta"
+              id="tipo-caneta"
+              formControlName="canetaSelecionada"
+              class="browser-default"
+            >
+              <option [value]="" disabled selected>Selecione uma caneta</option>
+              <option *ngFor="let caneta of canetas" [value]="caneta.codigo">
+                {{ caneta.espessura }}mm
+              </option>
+            </select>
+            <span
+              class="red-text"
+              *ngIf="
+                this.formData.controls.canetaSelecionada.errors?.required &&
+                this.formData.controls.canetaSelecionada.touched
+              "
+            >
+              É obrigatório escolher uma caneta
+            </span>
+          </div>
         </div>
       </div>
 
