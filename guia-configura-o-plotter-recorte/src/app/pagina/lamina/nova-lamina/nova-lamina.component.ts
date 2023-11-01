@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { CanetaDto } from 'src/app/model/caneta-dto';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LaminaDto } from 'src/app/model/lamina-dto';
-import { CanetaService } from 'src/app/services/caneta.service';
 import { LaminaService } from 'src/app/services/lamina.service';
 
 @Component({
@@ -19,9 +17,13 @@ export class NovaLaminaComponent {
     private service: LaminaService
   ) {
     this.formData = this.formBuilder.group({
-      cor: '',
-      tipoCorte: '',
+      cor: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
+      tipoCorte: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
     });
+  }
+
+  getValidForm() {
+    return this.formData.valid;
   }
 
   salvar() {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TapeteDto } from 'src/app/model/tapete-dto';
 import { TapetesService } from 'src/app/services/tapete.service';
@@ -18,9 +18,13 @@ export class NovoTapeteComponent {
     private service: TapetesService
   ) {
     this.formData = formBuilder.group({
-      cor: '',
-      forcaAderencia: '',
+      cor: ['', [Validators.required]],
+      forcaAderencia: ['', [Validators.required]],
     });
+  }
+
+  getValidForm() {
+    return this.formData.valid;
   }
 
   salvar() {
