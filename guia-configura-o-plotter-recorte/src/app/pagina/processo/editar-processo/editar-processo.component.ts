@@ -45,10 +45,10 @@ export class EditarProcessoComponent {
     this.tapetes = tapeteService.listar();
     this.laminas = laminaService.listar();
     this.formData = this.formBuilder.group({
-      canetaSelecionada: processoDto.canetaDto.codigo,
-      materialSelecionado: processoDto.materialDto.codigo,
-      tapeteSelecionado: processoDto.tapeteDto.codigo,
-      laminaSelecionado: processoDto.laminaDto.codigo,
+      canetaSelecionada: processoDto.canetaDto.id,
+      materialSelecionado: processoDto.materialDto.id,
+      tapeteSelecionado: processoDto.tapeteDto.id,
+      laminaSelecionado: processoDto.laminaDto.id,
       profundidadeLamina: processoDto.profundidadeLamina,
       pressaoFerramenta: processoDto.pressaoFerramenta,
       tipoProcesso: processoDto.tipo,

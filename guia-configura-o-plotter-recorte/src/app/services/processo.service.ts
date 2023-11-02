@@ -9,33 +9,33 @@ import { Constants } from '../utils/constantes';
 
 // Itens de exemplo para MaterialDto
 const material1: MaterialDto = {
-  codigo: 1,
+  id: 1,
   nome: 'Material A',
   gramatura: 500,
 };
 
 // Itens de exemplo para TapeteDto
 const tapete1: TapeteDto = {
-  codigo: 1,
+  id: 1,
   cor: 'Azul',
   forcaAderencia: 'Alta',
 };
 
 // Itens de exemplo para CanetaDto
 const caneta1: CanetaDto = {
-  codigo: 1,
+  id: 1,
   espessura: 0.5,
 };
 
 // Itens de exemplo para LaminaDto
 const lamina1: LaminaDto = {
-  codigo: 1,
+  id: 1,
   cor: 'Prata',
   tipoCorte: 'Fino',
 };
 
 const processoDefault: ProcessoDto = {
-  codigo: 0,
+  id: 0,
   materialDto: material1,
   tapeteDto: tapete1,
   canetaDto: caneta1,
@@ -66,7 +66,7 @@ export class ProcessoService {
   obter(id: number): ProcessoDto {
     for (let index = 0; index < this.processos.length; index++) {
       const element = this.processos[index];
-      if (element.codigo == id) {
+      if (element.id == id) {
         return element;
       }
     }
@@ -77,12 +77,12 @@ export class ProcessoService {
     let maiorCodigo = 0;
     for (let index = 0; index < this.processos.length; index++) {
       const element = this.processos[index];
-      if (element.codigo > maiorCodigo) {
-        maiorCodigo = element.codigo;
+      if (element.id > maiorCodigo) {
+        maiorCodigo = element.id;
       }
     }
 
-    processo.codigo = maiorCodigo + 1;
+    processo.id = maiorCodigo + 1;
     this.processos.push(processo);
     WebStorageUtil.set(Constants.PROCESSO_KEY, this.processos);
   }
@@ -91,7 +91,7 @@ export class ProcessoService {
     console.log('Id do processo a ser removido: ', id);
     for (let index = 0; index < this.processos.length; index++) {
       const element = this.processos[index];
-      if (element.codigo == id) {
+      if (element.id == id) {
         console.log('Processo a ser removido: ', element);
         this.processos.splice(index, 1);
         console.log('lista restantte: ', this.processos);

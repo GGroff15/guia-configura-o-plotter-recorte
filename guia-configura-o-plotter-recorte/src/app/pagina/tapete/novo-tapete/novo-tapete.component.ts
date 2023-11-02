@@ -32,7 +32,7 @@ export class NovoTapeteComponent {
     const cor = formData.value.cor;
     const forcaAderencia = formData.value.forcaAderencia;
     const tapete: TapeteDto = {
-      codigo: 0,
+      id: 0,
       cor: cor,
       forcaAderencia: forcaAderencia,
     };

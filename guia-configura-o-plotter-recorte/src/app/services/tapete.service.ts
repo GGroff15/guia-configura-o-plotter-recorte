@@ -5,7 +5,7 @@ import { WebStorageUtil } from '../utils/webStorageUtils';
 import { Constants } from '../utils/constantes';
 
 const tapeteDefault: TapeteDto = {
-  codigo: 0,
+  id: 0,
   cor: '',
   forcaAderencia: '',
 };
@@ -28,7 +28,7 @@ export class TapetesService {
   obter(id: number) {
     for (let index = 0; index < this.tapetes.length; index++) {
       const element = this.tapetes[index];
-      if (element.codigo == id) {
+      if (element.id == id) {
         return element
       }
     }
@@ -38,7 +38,7 @@ export class TapetesService {
   remover(id: number) {
     for (let index = 0; index < this.tapetes.length; index++) {
       const element = this.tapetes[index];
-      if (element.codigo == id) {
+      if (element.id == id) {
         this.tapetes.splice(index, 1);
       }
     }
@@ -49,12 +49,12 @@ export class TapetesService {
     let maiorCodigo = 0;
     for (let index = 0; index < this.tapetes?.length; index++) {
       const element = this.tapetes[index];
-      if (element.codigo > maiorCodigo) {
-        maiorCodigo = element.codigo;
+      if (element.id > maiorCodigo) {
+        maiorCodigo = element.id;
       }
     }
 
-    tapete.codigo = maiorCodigo+1;
+    tapete.id = maiorCodigo+1;
     this.tapetes.push(tapete);
     WebStorageUtil.set(Constants.TAPETE_KEY, this.tapetes);
   }

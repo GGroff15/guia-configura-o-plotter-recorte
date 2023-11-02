@@ -63,11 +63,11 @@ export class ItensTapeteComponent {
   }
 
   navegarParaEdicao() {
-    this.router.navigate(['/editar-tapete', this.tapete.codigo]);
+    this.router.navigate(['/editar-tapete', this.tapete.id]);
   }
 
   remover() {
-    this.service.remover(this.tapete.codigo);
+    this.service.remover(this.tapete.id);
   }
 
 }

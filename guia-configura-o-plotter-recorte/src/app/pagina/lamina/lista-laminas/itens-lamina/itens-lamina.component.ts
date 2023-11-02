@@ -61,10 +61,10 @@ export class ItensLaminaComponent {
   }
 
   navegarParaEdicao() {
-    this.router.navigate(['/editar-lamina', this.lamina.codigo]);
+    this.router.navigate(['/editar-lamina', this.lamina.id]);
   }
 
   remover() {
-    this.service.remover(this.lamina.codigo);
+    this.service.remover(this.lamina.id);
   }
 }

@@ -4,7 +4,7 @@ import { WebStorageUtil } from '../utils/webStorageUtils';
 import { Constants } from '../utils/constantes';
 
 const canetaDefault: CanetaDto = {
-  codigo: 0,
+  id: 0,
   espessura: 0,
 };
 
@@ -25,7 +25,7 @@ export class CanetaService {
   obter(id: number): CanetaDto {
     for (let index = 0; index < this.canetas.length; index++) {
       const element = this.canetas[index];
-      if (element.codigo == id) {
+      if (element.id == id) {
         return element;
       }
     }
@@ -35,7 +35,7 @@ export class CanetaService {
   remover(id: number) {
     for (let index = 0; index < this.canetas.length; index++) {
       const element = this.canetas[index];
-      if (element.codigo == id) {
+      if (element.id == id) {
         this.canetas.splice(index, 1);
       }
     }
@@ -46,12 +46,12 @@ export class CanetaService {
     let maiorCodigo = 0;
     for (let index = 0; index < this.canetas.length; index++) {
       const element = this.canetas[index];
-      if (element.codigo > maiorCodigo) {
-        maiorCodigo = element.codigo;
+      if (element.id > maiorCodigo) {
+        maiorCodigo = element.id;
       }
     }
 
-    caneta.codigo = maiorCodigo + 1;
+    caneta.id = maiorCodigo + 1;
     this.canetas.push(caneta);
 
     WebStorageUtil.set(Constants.CANETA_KEY, this.canetas);

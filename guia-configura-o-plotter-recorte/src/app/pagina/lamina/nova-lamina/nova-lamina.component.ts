@@ -31,7 +31,7 @@ export class NovaLaminaComponent {
     const cor = formData.value.cor;
     const tipoCorte = formData.value.tipoCorte;
     const lamina: LaminaDto = {
-      codigo: 0,
+      id: 0,
       cor: cor,
       tipoCorte: tipoCorte,
     };

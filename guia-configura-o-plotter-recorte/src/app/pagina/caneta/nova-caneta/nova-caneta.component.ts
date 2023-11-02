@@ -28,7 +28,7 @@ export class NovaCanetaComponent {
     const formData = this.formData;
     const espessura = this.convertToNumber(formData.value.espessura);
     const caneta: CanetaDto = {
-      codigo: 0,
+      id: 0,
       espessura: espessura,
     };
 

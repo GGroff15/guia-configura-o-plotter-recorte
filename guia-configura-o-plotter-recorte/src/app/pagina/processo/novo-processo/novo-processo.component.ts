@@ -125,7 +125,7 @@ export class NovoProcessoComponent implements OnInit {
     const tecido: boolean = formData.value.tecido;
 
     const processo: ProcessoDto = {
-      codigo: 0,
+      id: 0,
       materialDto: materialDto,
       tapeteDto: tapeteDto,
       canetaDto: canetaDto,

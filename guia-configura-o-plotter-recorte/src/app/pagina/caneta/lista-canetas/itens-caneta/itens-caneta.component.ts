@@ -61,11 +61,11 @@ export class ItensCanetaComponent implements OnInit {
   }
 
   navegarParaEdicao() {
-    this.router.navigate(['/editar-caneta', this.caneta.codigo]);
+    this.router.navigate(['/editar-caneta', this.caneta.id]);
   }
 
   remover() {
-    this.service.remover(this.caneta.codigo);
+    this.service.remover(this.caneta.id);
   }
 
 }

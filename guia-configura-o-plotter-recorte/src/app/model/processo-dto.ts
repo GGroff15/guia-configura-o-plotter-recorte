@@ -4,7 +4,7 @@ import { CanetaDto } from "./caneta-dto";
 import { LaminaDto } from "./lamina-dto";
 
 export interface ProcessoDto {
-    codigo: number;
+    id: number;
     materialDto: MaterialDto;
     tapeteDto: TapeteDto;
     canetaDto: CanetaDto;

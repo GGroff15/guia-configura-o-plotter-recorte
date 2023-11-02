@@ -2,20 +2,20 @@ import { Injectable } from '@angular/core';
 import { MaterialDto } from '../model/material-dto';
 
 const materialDefault: MaterialDto = {
-  codigo: 0,
+  id: 0,
   nome: '',
   gramatura: 0
 };
 
 // Itens de exemplo para MaterialDto
 const material1: MaterialDto = {
-  codigo: 1,
+  id: 1,
   nome: 'Material A',
   gramatura: 500
 };
 
 const material2: MaterialDto = {
-  codigo: 2,
+  id: 2,
   nome: 'Material B',
   gramatura: 220
 };
@@ -38,7 +38,7 @@ export class MaterialService {
   obter(id: number): MaterialDto {
     for (let index = 0; index < this.materiais.length; index++) {
       const element = this.materiais[index];
-      if (element.codigo === id) {
+      if (element.id === id) {
         return element;
       }
     }
