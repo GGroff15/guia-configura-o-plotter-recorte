@@ -1,6 +1,6 @@
 export interface LaminaDto {
 
-    codigo: number;
+    id: number;
     cor: string;
     tipoCorte: string;
 

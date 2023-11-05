@@ -1,0 +1,31 @@
+<h4>Novo Tapete</h4>
+
+<form [formGroup]="formData">
+  <div class="input-field col s12">
+    <input id="cor" type="text" formControlName="cor" />
+    <label for="cor">Cor: *</label>
+  </div>
+  <span
+    class="red-text"
+    *ngIf="
+      this.formData.controls.cor.errors?.required &&
+      this.formData.controls.cor.touched
+    "
+  >
+    É obrigatório informar a cor do tapete
+  </span>
+
+  <div class="input-field col s12">
+    <input id="forca-aderencia" type="text" formControlName="forcaAderencia" />
+    <label for="forca-aderencia">Força de Aderencia: *</label>
+  </div>
+  <span
+    class="red-text"
+    *ngIf="
+      this.formData.controls.forcaAderencia.errors?.required &&
+      this.formData.controls.forcaAderencia.touched
+    "
+  >
+    É obrigatório informar a força de aderencia do tapete
+  </span>
+</form>

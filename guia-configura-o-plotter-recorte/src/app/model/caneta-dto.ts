@@ -1,6 +1,6 @@
 export interface CanetaDto {
 
-    codigo: number;
+    id: number;
     espessura: number;
 
 }

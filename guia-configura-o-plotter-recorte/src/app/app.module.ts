@@ -18,6 +18,15 @@ import { ListaCanetasComponent } from './pagina/caneta/lista-canetas/lista-canet
 import { ItensCanetaComponent } from './pagina/caneta/lista-canetas/itens-caneta/itens-caneta.component';
 import { NovaCanetaComponent } from './pagina/caneta/nova-caneta/nova-caneta.component';
 import { EditarCanetaComponent } from './pagina/caneta/editar-caneta/editar-caneta.component';
+import { ListaLaminasComponent } from './pagina/lamina/lista-laminas/lista-laminas.component';
+import { NovaLaminaComponent } from './pagina/lamina/nova-lamina/nova-lamina.component';
+import { ItensLaminaComponent } from './pagina/lamina/lista-laminas/itens-lamina/itens-lamina.component';
+import { EditerLaminaComponent } from './pagina/lamina/editar-lamina/editar-lamina.component';
+import { ListaTapetesComponent } from './pagina/tapete/lista-tapetes/lista-tapetes.component';
+import { ItensTapeteComponent } from './pagina/tapete/lista-tapetes/itens-tapete/itens-tapete.component';
+import { EditarTapeteComponent } from './pagina/tapete/editar-tapete/editar-tapete.component';
+import { NovoTapeteComponent } from './pagina/tapete/novo-tapete/novo-tapete.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,15 +44,24 @@ import { EditarCanetaComponent } from './pagina/caneta/editar-caneta/editar-cane
     ListaCanetasComponent,
     ItensCanetaComponent,
     NovaCanetaComponent,
-    EditarCanetaComponent
+    EditarCanetaComponent,
+    ListaLaminasComponent,
+    NovaLaminaComponent,
+    ItensLaminaComponent,
+    EditerLaminaComponent,
+    ListaTapetesComponent,
+    ItensTapeteComponent,
+    EditarTapeteComponent,
+    NovoTapeteComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

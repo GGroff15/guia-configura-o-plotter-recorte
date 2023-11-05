@@ -1,69 +1,60 @@
 import { CanetaDto } from 'src/app/model/caneta-dto';
 import { Injectable } from '@angular/core';
+import { WebStorageUtil } from '../utils/webStorageUtils';
+import { Constants } from '../utils/constantes';
+import { CanetaHttpConectorService } from './caneta-http-conector.service';
 
 const canetaDefault: CanetaDto = {
-  codigo: 0,
-  espessura: 0
-}
-
-// Itens de exemplo para CanetaDto
-const caneta1: CanetaDto = {
-  codigo: 1,
-  espessura: 0.5,
-};
-
-const caneta2: CanetaDto = {
-  codigo: 2,
-  espessura: 0.7,
+  id: 0,
+  espessura: 0,
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CanetaService {
-
-  remover(id: number) {
-    console.log('Id do processo a ser removido: ', id);
-    for (let index = 0; index < this.canetas.length; index++) {
-      const element = this.canetas[index];
-      if (element.codigo == id) {
-        console.log('Processo a ser removido: ', element);
-        this.canetas.splice(index, 1);
-        console.log('lista restantte: ', this.canetas);
-      }
-    }
-  }
-  
   private canetas: CanetaDto[];
 
-  constructor() {
-    this.canetas = [caneta1, caneta2];
+  constructor(private httpConnector: CanetaHttpConectorService) {
+    this.httpConnector.listar().then((canetas) => {
+      this.canetas = canetas;
+      WebStorageUtil.set(Constants.CANETA_KEY, canetas);
+    }).catch((error) => {
+      this.canetas = WebStorageUtil.get(Constants.CANETA_KEY);
+    });
   }
 
-  listar(): CanetaDto[] {
-    return this.canetas;
+  listar(): Promise<CanetaDto[]> {
+    return this.httpConnector.listar();
   }
 
-  obter(id: number): CanetaDto {
+  obter(id: number): Promise<CanetaDto> {
+    return this.httpConnector.obter(id);
+  }
+
+  remover(id: number) {
     for (let index = 0; index < this.canetas.length; index++) {
       const element = this.canetas[index];
-      if (element.codigo == id) {
-        return element;
+      if (element.id == id) {
+        this.canetas.splice(index, 1);
       }
     }
-    return canetaDefault;
+    WebStorageUtil.set(Constants.CANETA_KEY, this.canetas);
   }
 
   salvar(caneta: CanetaDto) {
     let maiorCodigo = 0;
     for (let index = 0; index < this.canetas.length; index++) {
       const element = this.canetas[index];
-      if (element.codigo > maiorCodigo) {
-        maiorCodigo = element.codigo;
+      if (element.id > maiorCodigo) {
+        maiorCodigo = element.id;
       }
     }
 
-    caneta.codigo = maiorCodigo+1;
+    caneta.id = maiorCodigo + 1;
     this.canetas.push(caneta);
+
+    WebStorageUtil.set(Constants.CANETA_KEY, this.canetas);
+    this.httpConnector.salvar(caneta);
   }
 }

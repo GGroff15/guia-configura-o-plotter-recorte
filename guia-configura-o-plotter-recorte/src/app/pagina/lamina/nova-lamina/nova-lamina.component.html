@@ -1,0 +1,49 @@
+<h4>Nova Lâmina</h4>
+
+<form [formGroup]="formData">
+  <div class="input-field col s12">
+    <input id="cor" type="text" formControlName="cor" />
+    <label for="cor">Cor: *</label>
+  </div>
+  <span
+    class="red-text"
+    *ngIf="
+      this.formData.controls.cor.errors?.required &&
+      this.formData.controls.cor.touched
+    "
+  >
+    É obrigatório informar a cor da lâmina
+  </span>
+  <span
+    class="red-text"
+    *ngIf="
+      this.formData.controls.cor.errors?.pattern &&
+      this.formData.controls.cor.touched
+    "
+  >
+    A cor da lâmina não pode conter números
+  </span>
+
+  <div class="input-field col s12">
+    <input id="tipo-corte" type="text" formControlName="tipoCorte" />
+    <label for="tipo-corte">Tipo de Corte: *</label>
+  </div>
+  <span
+    class="red-text"
+    *ngIf="
+      this.formData.controls.tipoCorte.errors?.required &&
+      this.formData.controls.tipoCorte.touched
+    "
+  >
+    É obrigatório informar o tipo de corte da lâmina
+  </span>
+  <span
+    class="red-text"
+    *ngIf="
+      this.formData.controls.tipoCorte.errors?.pattern &&
+      this.formData.controls.tipoCorte.touched
+    "
+  >
+    O tipo de corte da lâmina não pode conter números
+  </span>
+</form>

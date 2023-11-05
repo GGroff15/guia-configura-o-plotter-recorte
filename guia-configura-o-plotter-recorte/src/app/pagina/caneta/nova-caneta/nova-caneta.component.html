@@ -3,6 +3,15 @@
 <form [formGroup]="formData">
   <div class="input-field col s12">
     <input id="espessura" type="number" formControlName="espessura" />
-    <label for="pressao-ferramenta">Espessura:</label>
+    <label for="pressao-ferramenta">Espessura: *</label>
   </div>
+  <span
+    class="red-text"
+    *ngIf="
+      this.formData.controls.espessura.errors?.required &&
+      this.formData.controls.espessura.touched
+    "
+  >
+    É obrigatório informar a espessura da caneta
+  </span>
 </form>

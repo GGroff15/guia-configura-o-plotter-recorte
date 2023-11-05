@@ -1,6 +1,6 @@
 export interface TapeteDto {
 
-    codigo: number;
+    id: number;
     cor: string;
     forcaAderencia: string;
 
