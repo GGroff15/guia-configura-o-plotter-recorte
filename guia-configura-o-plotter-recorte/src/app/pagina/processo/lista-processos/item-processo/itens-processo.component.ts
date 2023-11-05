@@ -1,8 +1,10 @@
-import { ListaProcessosService } from '../lista-processos.service';
+import { ListaProcessosService } from '../../lista-processos.service';
 import { Component, ElementRef, NgZone, OnInit } from '@angular/core';
 import { ProcessoDto } from 'src/app/model/processo-dto';
 import { Router } from '@angular/router';
 import { ProcessoService } from 'src/app/services/processo.service';
+import { WebStorageUtil } from 'src/app/utils/webStorageUtils';
+import { Constants } from 'src/app/utils/constantes';
 
 @Component({
   selector: 'app-itens-processo',
@@ -19,9 +21,10 @@ export class ItensProcessoComponent implements OnInit {
     private listaProcessosService: ListaProcessosService,
     private router: Router,
     private elementRef: ElementRef,
-    private ngZone: NgZone,
-    private processoService: ProcessoService
+    private ngZone: NgZone
   ) {
+    this.listarProcessos();
+
     this.observer = new MutationObserver((mutationsList, observer) => {
       this.ngZone.run(() => {
         mutationsList.forEach((mutation) => {
@@ -38,8 +41,17 @@ export class ItensProcessoComponent implements OnInit {
     });
   }
 
+  listarProcessos() {
+    this.listaProcessosService.setFiltro('Todos');
+    this.listaProcessosService.listar().then((processos) => {
+      this.processos = processos;
+    }).catch((erro) => {
+      this.processos = WebStorageUtil.get(Constants.PROCESSO_KEY);
+    })
+  }
+
   ngOnInit(): void {
-    this.listaProcessosService.getListaProcessos().subscribe((processos) => {
+    this.listaProcessosService.asObservable().subscribe((processos) => {
       this.processos = processos;
       this.iniciarObservacaoDOM();
       const collapsible = document.querySelector('.collapsible');
@@ -65,6 +77,6 @@ export class ItensProcessoComponent implements OnInit {
   }
 
   remover() {
-    this.processoService.remover(this.processo.id);
+    this.listaProcessosService.remover(this.processo.id);
   }
 }

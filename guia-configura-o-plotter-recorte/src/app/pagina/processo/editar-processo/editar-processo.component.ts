@@ -11,6 +11,8 @@ import { LaminaService } from 'src/app/services/lamina.service';
 import { MaterialService } from 'src/app/services/material.service';
 import { ProcessoService } from 'src/app/services/processo.service';
 import { TapetesService } from 'src/app/services/tapete.service';
+import { Constants } from 'src/app/utils/constantes';
+import { WebStorageUtil } from 'src/app/utils/webStorageUtils';
 
 @Component({
   selector: 'app-editar-processo',
@@ -38,12 +40,39 @@ export class EditarProcessoComponent {
     private processoService: ProcessoService
   ) {
     const idProcesso: number = this.route.snapshot.params['id'];
-    const processoDto: ProcessoDto = this.processoService.obter(idProcesso);
 
-    this.canetas = canetaService.listar();
-    this.materiais = materialService.listar();
-    this.tapetes = tapeteService.listar();
-    this.laminas = laminaService.listar();
+    let processoDto: ProcessoDto;
+
+    this.processoService
+      .obter(idProcesso)
+      .then((processo) => (processoDto = processo));
+
+    canetaService
+      .listar()
+      .then((canetas) => (this.canetas = canetas))
+      .catch(
+        (error) => (this.canetas = WebStorageUtil.get(Constants.CANETA_KEY))
+      );
+    materialService
+      .listar()
+      .then((materiais) => (this.materiais = materiais))
+      .catch(
+        (erro) => (this.materiais = WebStorageUtil.get(Constants.MATERIAL_KEY))
+      );
+    tapeteService
+      .listar()
+      .then((tapetes) => (this.tapetes = tapetes))
+      .catch(
+        (erro) => (this.tapetes = WebStorageUtil.get(Constants.TAPETE_KEY))
+      );
+
+    laminaService
+      .listar()
+      .then((laminas) => (this.laminas = laminas))
+      .catch(
+        (erro) => (this.laminas = WebStorageUtil.get(Constants.LAMINA_KEY))
+      );
+
     this.formData = this.formBuilder.group({
       canetaSelecionada: processoDto.canetaDto.id,
       materialSelecionado: processoDto.materialDto.id,

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LaminaDto } from '../model/lamina-dto';
 import { WebStorageUtil } from '../utils/webStorageUtils';
 import { Constants } from '../utils/constantes';
+import { LaminaHttpConnectorService } from './lamina-http-connector.service';
 
 const laminaDefault: LaminaDto = {
   id: 0,
@@ -16,22 +17,21 @@ export class LaminaService {
   
   private laminas: LaminaDto[];
 
-  constructor() {
-    this.laminas = WebStorageUtil.get(Constants.LAMINA_KEY);
+  constructor(private httpConnector: LaminaHttpConnectorService) {
+    this.httpConnector.listar().then((laminas) => {
+      this.laminas = laminas;
+      WebStorageUtil.set(Constants.LAMINA_KEY, laminas);
+    }).catch((erro) => {
+      this.laminas = WebStorageUtil.get(Constants.LAMINA_KEY);
+    });
   }
 
-  listar(): LaminaDto[] {
-    return this.laminas;
+  listar(): Promise<LaminaDto[]> {
+    return this.httpConnector.listar();
   }
 
-  obter(id: number): LaminaDto {
-    for (let index = 0; index < this.laminas.length; index++) {
-      const element = this.laminas[index];
-      if (element.id == id) {
-        return element;
-      }
-    }
-    return laminaDefault;
+  obter(id: number): Promise<LaminaDto> {
+    return this.httpConnector.obter(id);
   }
 
   remover(id: number) {
@@ -59,5 +59,6 @@ export class LaminaService {
     this.laminas.push(lamina);
 
     WebStorageUtil.set(Constants.LAMINA_KEY, this.laminas);
+    this.httpConnector.salvar(lamina);
   }
 }

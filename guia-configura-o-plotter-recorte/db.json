@@ -1,0 +1,174 @@
+{
+  "materiais": [
+    {
+      "id": 1,
+      "nome": "Material A",
+      "gramatura": 100
+    },
+    {
+      "id": 2,
+      "nome": "Material B",
+      "gramatura": 200
+    }
+  ],
+  "tapetes": [
+    {
+      "id": 1,
+      "cor": "azul",
+      "forcaAderencia": "padrão"
+    },
+    {
+      "id": 2,
+      "cor": "Verde",
+      "forcaAderencia": "Ultra Forte"
+    }
+  ],
+  "laminas": [
+    {
+      "id": 1,
+      "cor": "Azul",
+      "tipoCorte": "Delicado"
+    },
+    {
+      "id": 2,
+      "cor": "Roxo",
+      "tipoCorte": "Padrão"
+    }
+  ],
+  "canetas": [
+    {
+      "id": 1,
+      "espessura": 2
+    },
+    {
+      "id": 2,
+      "espessura": 5
+    },
+    {
+      "id": 3,
+      "espessura": 10
+    },
+    {
+      "id": 4,
+      "espessura": 2
+    },
+    {
+      "id": 5,
+      "espessura": 20
+    }
+  ],
+  "processos": [
+    {
+      "id": 1,
+      "materialDto": {
+        "id": 1,
+        "nome": "Material A",
+        "gramatura": 100
+      },
+      "tapeteDto": {
+        "id": 2,
+        "cor": "Verde",
+        "forcaAderencia": "Ultra Forte"
+      },
+      "canetaDto": {
+        "id": 2,
+        "espessura": 5
+      },
+      "pressaoFerramenta": 3,
+      "tipo": "Desenho",
+      "laminaDto": null,
+      "profundidadeLamina": 0,
+      "tecido": false
+    },
+    {
+      "id": 2,
+      "materialDto": {
+        "id": 2,
+        "nome": "Material B",
+        "gramatura": 200
+      },
+      "tapeteDto": {
+        "id": 1,
+        "cor": "azul",
+        "forcaAderencia": "padrão"
+      },
+      "canetaDto": null,
+      "pressaoFerramenta": 4,
+      "tipo": "Corte",
+      "laminaDto": {
+        "id": 1,
+        "cor": "Azul",
+        "tipoCorte": "Delicado"
+      },
+      "profundidadeLamina": 3,
+      "tecido": false
+    },
+    {
+      "id": 3,
+      "materialDto": {
+        "id": 2,
+        "nome": "Material B",
+        "gramatura": 200
+      },
+      "tapeteDto": {
+        "id": 2,
+        "cor": "Verde",
+        "forcaAderencia": "Ultra Forte"
+      },
+      "canetaDto": null,
+      "pressaoFerramenta": 4,
+      "tipo": "Corte",
+      "laminaDto": {
+        "id": 2,
+        "cor": "Roxo",
+        "tipoCorte": "Padrão"
+      },
+      "profundidadeLamina": 2,
+      "tecido": true
+    },
+    {
+      "id": 4,
+      "materialDto": {
+        "id": 2,
+        "nome": "Material B",
+        "gramatura": 200
+      },
+      "tapeteDto": {
+        "id": 1,
+        "cor": "azul",
+        "forcaAderencia": "padrão"
+      },
+      "canetaDto": {
+        "id": 1,
+        "espessura": 2
+      },
+      "pressaoFerramenta": 1,
+      "tipo": "Desenho",
+      "laminaDto": null,
+      "profundidadeLamina": 0,
+      "tecido": true
+    },
+    {
+      "id": 5,
+      "materialDto": {
+        "id": 2,
+        "nome": "Material B",
+        "gramatura": 200
+      },
+      "tapeteDto": {
+        "id": 1,
+        "cor": "azul",
+        "forcaAderencia": "padrão"
+      },
+      "canetaDto": {
+        "id": 1,
+        "espessura": 2
+      },
+      "pressaoFerramenta": 3,
+      "tipo": "Desenho",
+      "laminaDto": null,
+      "profundidadeLamina": 0,
+      "tecido": true
+    }
+  ]
+}

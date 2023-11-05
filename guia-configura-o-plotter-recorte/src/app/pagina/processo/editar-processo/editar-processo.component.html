@@ -11,8 +11,8 @@
         class="browser-default"
         formControlName="materialSelecionado"
       >
-        <option [value]="" disabled selected>Selecione um material</option>
-        <option *ngFor="let material of materiais" [value]="material.codigo">
+        <option [ngValue]="null" disabled>Selecione um material</option>
+        <option *ngFor="let material of materiais" [ngValue]="material">
           {{ material.nome }} - {{ material.gramatura }} gramas
         </option>
       </select>
@@ -28,8 +28,8 @@
         class="browser-default"
         formControlName="tapeteSelecionado"
       >
-        <option [value]="" disabled selected>Selecione um tapete</option>
-        <option *ngFor="let tapete of tapetes" [value]="tapete.codigo">
+        <option [ngValue]="null" disabled>Selecione um tapete</option>
+        <option *ngFor="let tapete of tapetes" [ngValue]="tapete">
           {{ tapete.cor }} - {{ tapete.forcaAderencia }}
         </option>
       </select>
@@ -75,8 +75,8 @@
           formControlName="laminaSelecionado"
           class="browser-default"
         >
-          <option [value]="" disabled selected>Selecione uma lâmina</option>
-          <option *ngFor="let lamina of laminas" [value]="lamina.codigo">
+          <option [ngValue]="null" disabled selected>Selecione uma lâmina</option>
+          <option *ngFor="let lamina of laminas" [ngValue]="lamina">
             {{ lamina.cor }} - {{ lamina.tipoCorte }}
           </option>
         </select>
@@ -101,8 +101,8 @@
         formControlName="canetaSelecionada"
         class="browser-default"
       >
-        <option [value]="" disabled selected>Selecione uma caneta</option>
-        <option *ngFor="let caneta of canetas" [value]="caneta.codigo">
+        <option [ngValue]="null" disabled selected>Selecione uma caneta</option>
+        <option *ngFor="let caneta of canetas" [ngValue]="caneta">
           {{ caneta.espessura }}mm
         </option>
       </select>

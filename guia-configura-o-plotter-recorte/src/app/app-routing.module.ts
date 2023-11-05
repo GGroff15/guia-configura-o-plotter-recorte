@@ -5,7 +5,7 @@ import { ListaProcessosComponent } from './pagina/processo/lista-processos/lista
 import { EditarProcessoComponent } from './pagina/processo/editar-processo/editar-processo.component';
 import { ListaCanetasComponent } from './pagina/caneta/lista-canetas/lista-canetas.component';
 import { ListaLaminasComponent } from './pagina/lamina/lista-laminas/lista-laminas.component';
-import { EditerLaminaComponent } from './pagina/lamina/editer-lamina/editer-lamina.component';
+import { EditerLaminaComponent } from './pagina/lamina/editar-lamina/editar-lamina.component';
 import { ListaTapetesComponent } from './pagina/tapete/lista-tapetes/lista-tapetes.component';
 import { EditarTapeteComponent } from './pagina/tapete/editar-tapete/editar-tapete.component';
 

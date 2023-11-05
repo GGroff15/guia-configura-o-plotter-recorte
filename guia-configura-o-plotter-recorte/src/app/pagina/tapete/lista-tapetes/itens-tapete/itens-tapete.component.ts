@@ -2,8 +2,10 @@ import { Component, ElementRef, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { TapeteDto } from 'src/app/model/tapete-dto';
 import { LaminaService } from 'src/app/services/lamina.service';
-import { ListaTapetesService } from '../lista-tapetes.service';
+import { ListaTapetesService } from '../../lista-tapetes.service';
 import { TapetesService } from 'src/app/services/tapete.service';
+import { WebStorageUtil } from 'src/app/utils/webStorageUtils';
+import { Constants } from 'src/app/utils/constantes';
 
 @Component({
   selector: 'app-itens-tapete',
@@ -17,12 +19,12 @@ export class ItensTapeteComponent {
 
   private observer: MutationObserver;
 
-  constructor(private service: TapetesService,
+  constructor(
     private listaTapetesService: ListaTapetesService,
     private router: Router,
     private elementRef: ElementRef,
     private ngZone: NgZone) {
-    this.tapetes = service.listar();
+    this.listarTapetes();
     this.observer = new MutationObserver((mutationsList, observer) => {
       this.ngZone.run(() => {
         mutationsList.forEach((mutation) => {
@@ -42,8 +44,16 @@ export class ItensTapeteComponent {
     });
   }
 
+  private listarTapetes() {
+    this.listaTapetesService.listar().then((tapetes) => {
+      this.tapetes = tapetes;
+    }).catch((erro) => {
+      this.tapetes = WebStorageUtil.get(Constants.TAPETE_KEY);
+    })
+  }
+
   ngOnInit(): void {
-    this.listaTapetesService.getListaTapetes().subscribe((tapetes) => {
+    this.listaTapetesService.asObservable().subscribe((tapetes) => {
       this.tapetes = tapetes;
       this.iniciarObservacaoDOM();
     });
@@ -67,7 +77,7 @@ export class ItensTapeteComponent {
   }
 
   remover() {
-    this.service.remover(this.tapete.id);
+    this.listaTapetesService.remover(this.tapete.id);
   }
 
 }

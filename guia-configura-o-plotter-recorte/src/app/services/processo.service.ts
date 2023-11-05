@@ -6,6 +6,7 @@ import { TapeteDto } from '../model/tapete-dto';
 import { Injectable } from '@angular/core';
 import { WebStorageUtil } from '../utils/webStorageUtils';
 import { Constants } from '../utils/constantes';
+import { ProcessoHttpConnectorService } from './processo-http-connector.service';
 
 // Itens de exemplo para MaterialDto
 const material1: MaterialDto = {
@@ -52,28 +53,31 @@ const processoDefault: ProcessoDto = {
 export class ProcessoService {
   processos: ProcessoDto[];
 
-  constructor() {
-    this.processos = WebStorageUtil.get(Constants.PROCESSO_KEY);
+  constructor(private httpConnector: ProcessoHttpConnectorService) {
+    this.httpConnector
+      .listar()
+      .then((processos) => {
+        this.processos = processos;
+        WebStorageUtil.set(Constants.PROCESSO_KEY, processos);
+      })
+      .catch((error) => {
+        this.processos = WebStorageUtil.get(Constants.PROCESSO_KEY);
+      });
   }
 
-  listar(filtro: string): ProcessoDto[] {
-    if (filtro === 'Todos') {
-      return this.processos;
-    }
-    return this.processos.filter((processo) => processo.tipo === filtro);
+  listar(): Promise<ProcessoDto[]> {
+    return this.httpConnector.listar();
   }
 
-  obter(id: number): ProcessoDto {
-    for (let index = 0; index < this.processos.length; index++) {
-      const element = this.processos[index];
-      if (element.id == id) {
-        return element;
-      }
-    }
-    return processoDefault;
+  listarComfiltro(filter: string): Promise<ProcessoDto[]> {
+    return this.httpConnector.listarComfiltro(filter);
   }
 
-  salver(processo: ProcessoDto) {
+  obter(id: number): Promise<ProcessoDto> {
+    return this.httpConnector.obter(id);
+  }
+
+  salvar(processo: ProcessoDto): void {
     let maiorCodigo = 0;
     for (let index = 0; index < this.processos.length; index++) {
       const element = this.processos[index];
@@ -84,17 +88,16 @@ export class ProcessoService {
 
     processo.id = maiorCodigo + 1;
     this.processos.push(processo);
+
     WebStorageUtil.set(Constants.PROCESSO_KEY, this.processos);
+    this.httpConnector.salvar(processo);
   }
 
   remover(id: number) {
-    console.log('Id do processo a ser removido: ', id);
     for (let index = 0; index < this.processos.length; index++) {
       const element = this.processos[index];
       if (element.id == id) {
-        console.log('Processo a ser removido: ', element);
         this.processos.splice(index, 1);
-        console.log('lista restantte: ', this.processos);
       }
     }
     WebStorageUtil.set(Constants.PROCESSO_KEY, this.processos);

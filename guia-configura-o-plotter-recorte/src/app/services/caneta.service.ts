@@ -2,6 +2,7 @@ import { CanetaDto } from 'src/app/model/caneta-dto';
 import { Injectable } from '@angular/core';
 import { WebStorageUtil } from '../utils/webStorageUtils';
 import { Constants } from '../utils/constantes';
+import { CanetaHttpConectorService } from './caneta-http-conector.service';
 
 const canetaDefault: CanetaDto = {
   id: 0,
@@ -14,22 +15,21 @@ const canetaDefault: CanetaDto = {
 export class CanetaService {
   private canetas: CanetaDto[];
 
-  constructor() {
-    this.canetas = WebStorageUtil.get(Constants.CANETA_KEY);
+  constructor(private httpConnector: CanetaHttpConectorService) {
+    this.httpConnector.listar().then((canetas) => {
+      this.canetas = canetas;
+      WebStorageUtil.set(Constants.CANETA_KEY, canetas);
+    }).catch((error) => {
+      this.canetas = WebStorageUtil.get(Constants.CANETA_KEY);
+    });
   }
 
-  listar(): CanetaDto[] {
-    return this.canetas;
+  listar(): Promise<CanetaDto[]> {
+    return this.httpConnector.listar();
   }
 
-  obter(id: number): CanetaDto {
-    for (let index = 0; index < this.canetas.length; index++) {
-      const element = this.canetas[index];
-      if (element.id == id) {
-        return element;
-      }
-    }
-    return canetaDefault;
+  obter(id: number): Promise<CanetaDto> {
+    return this.httpConnector.obter(id);
   }
 
   remover(id: number) {
@@ -55,5 +55,6 @@ export class CanetaService {
     this.canetas.push(caneta);
 
     WebStorageUtil.set(Constants.CANETA_KEY, this.canetas);
+    this.httpConnector.salvar(caneta);
   }
 }

@@ -1,8 +1,10 @@
 import { Component, ElementRef, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CanetaDto } from 'src/app/model/caneta-dto';
-import { CanetaService } from 'src/app/services/caneta.service';
-import { ListaCanetasService } from '../lista-canetas.service';
+import { ListaCanetasService } from '../../lista-canetas.service';
+import { Subscription } from 'rxjs';
+import { WebStorageUtil } from 'src/app/utils/webStorageUtils';
+import { Constants } from 'src/app/utils/constantes';
 
 @Component({
   selector: 'app-itens-caneta',
@@ -14,23 +16,21 @@ export class ItensCanetaComponent implements OnInit {
   canetas: CanetaDto[];
   caneta!: CanetaDto;
   private observer: MutationObserver;
+  subscription!: Subscription;
 
-  constructor(private service: CanetaService,
-    private listaCanetasService: ListaCanetasService,
+  constructor(private listaCanetasService: ListaCanetasService,
     private router: Router,
     private elementRef: ElementRef,
     private ngZone: NgZone) {
-    this.canetas = service.listar();
+    this.listarCanetas();
+    
     this.observer = new MutationObserver((mutationsList, observer) => {
       this.ngZone.run(() => {
         mutationsList.forEach((mutation) => {
           mutation.addedNodes.forEach((addedNode) => {
             if (addedNode instanceof HTMLElement) {
-              console.log(addedNode);
               if (addedNode.classList.contains('initialize-dropdown')) {
-                console.log(addedNode);
                 const a = addedNode.querySelector('.dropdown-trigger');
-                console.log(a);
                 M.Dropdown.init(a!);
               }
             }
@@ -40,8 +40,16 @@ export class ItensCanetaComponent implements OnInit {
     });
   }
 
+  private listarCanetas() {
+    this.listaCanetasService.listar().then((canetas) => {
+      this.canetas = canetas;
+    }).catch((error) => {
+      this.canetas = WebStorageUtil.get(Constants.CANETA_KEY);
+    });
+  }
+
   ngOnInit(): void {
-    this.listaCanetasService.getListaCanetas().subscribe((canetas) => {
+    this.subscription = this.listaCanetasService.asObservable().subscribe((canetas) => {
       this.canetas = canetas;
       this.iniciarObservacaoDOM();
     });
@@ -49,6 +57,7 @@ export class ItensCanetaComponent implements OnInit {
 
   ngOnDestroy() {
     this.observer.disconnect();
+    this.subscription.unsubscribe();
   }
 
   iniciarObservacaoDOM() {
@@ -65,7 +74,7 @@ export class ItensCanetaComponent implements OnInit {
   }
 
   remover() {
-    this.service.remover(this.caneta.id);
+    this.listaCanetasService.remover(this.caneta.id);
   }
 
 }

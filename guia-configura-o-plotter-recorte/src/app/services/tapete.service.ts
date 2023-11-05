@@ -3,6 +3,7 @@ import { TapeteDto } from '../model/tapete-dto';
 import { LaminaDto } from '../model/lamina-dto';
 import { WebStorageUtil } from '../utils/webStorageUtils';
 import { Constants } from '../utils/constantes';
+import { TapeteHttpConnectorService } from './tapete-http-connector.service';
 
 const tapeteDefault: TapeteDto = {
   id: 0,
@@ -17,22 +18,21 @@ export class TapetesService {
   
   private tapetes: TapeteDto[];
 
-  constructor() {
-    this.tapetes = WebStorageUtil.get(Constants.TAPETE_KEY);
+  constructor(private httpConnector: TapeteHttpConnectorService) {
+    this.httpConnector.listar().then((tapetes) => {
+      this.tapetes = tapetes;
+      WebStorageUtil.set(Constants.TAPETE_KEY, tapetes);
+    }).catch((error) => {
+      this.tapetes = WebStorageUtil.get(Constants.TAPETE_KEY);
+    });
   }
 
-  listar(): TapeteDto[] {
-    return this.tapetes;
+  listar(): Promise<TapeteDto[]> {
+    return this.httpConnector.listar();
   }
 
-  obter(id: number) {
-    for (let index = 0; index < this.tapetes.length; index++) {
-      const element = this.tapetes[index];
-      if (element.id == id) {
-        return element
-      }
-    }
-    return tapeteDefault;
+  obter(id: number): Promise<TapeteDto> {
+    return this.httpConnector.obter(id);
   }
 
   remover(id: number) {
@@ -56,6 +56,8 @@ export class TapetesService {
 
     tapete.id = maiorCodigo+1;
     this.tapetes.push(tapete);
+
     WebStorageUtil.set(Constants.TAPETE_KEY, this.tapetes);
+    this.httpConnector.salvar(tapete);
   }
 }
