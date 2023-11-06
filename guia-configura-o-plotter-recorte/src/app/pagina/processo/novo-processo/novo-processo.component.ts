@@ -17,6 +17,12 @@ import { CanetaService } from 'src/app/services/caneta.service';
 import { LaminaService } from 'src/app/services/lamina.service';
 import { ProcessoService } from 'src/app/services/processo.service';
 import { TapetesService } from 'src/app/services/tapete.service';
+import { Constants } from 'src/app/utils/constantes';
+import { WebStorageUtil } from 'src/app/utils/webStorageUtils';
+import { ListaCanetasService } from '../../caneta/lista-canetas.service';
+import { ListaTapetesService } from '../../tapete/lista-tapetes.service';
+import { ListaLaminasService } from '../../lamina/lista-laminas.service';
+import { ListaProcessosService } from '../lista-processos.service';
 
 @Component({
   selector: 'app-novo-processo',
@@ -31,23 +37,45 @@ export class NovoProcessoComponent implements OnInit {
   formData: FormGroup;
 
   constructor(
-    private canetaService: CanetaService,
+    private canetaService: ListaCanetasService,
     private materialService: MaterialService,
-    private tapeteService: TapetesService,
-    private laminaService: LaminaService,
+    private tapeteService: ListaTapetesService,
+    private laminaService: ListaLaminasService,
+    private processoService: ListaProcessosService,
     private formBuilder: FormBuilder,
-    private processoService: ProcessoService
   ) {
-    this.canetas = canetaService.listar();
-    this.materiais = materialService.listar();
-    this.tapetes = tapeteService.listar();
-    this.laminas = laminaService.listar();
+    canetaService
+      .listar()
+      .then((canetas) => (this.canetas = canetas))
+      .catch(
+        (error) => (this.canetas = WebStorageUtil.get(Constants.CANETA_KEY))
+      );
+    materialService
+      .listar()
+      .then((materiais) => (this.materiais = materiais))
+      .catch(
+        (erro) => (this.materiais = WebStorageUtil.get(Constants.MATERIAL_KEY))
+      );
+    tapeteService
+      .listar()
+      .then((tapetes) => (this.tapetes = tapetes))
+      .catch(
+        (erro) => (this.tapetes = WebStorageUtil.get(Constants.TAPETE_KEY))
+      );
+
+    laminaService
+      .listar()
+      .then((laminas) => (this.laminas = laminas))
+      .catch(
+        (erro) => (this.laminas = WebStorageUtil.get(Constants.LAMINA_KEY))
+      );
+
     this.formData = this.formBuilder.group({
-      materialSelecionado: ['', [Validators.required]],
-      tapeteSelecionado: ['', [Validators.required]],
+      materialSelecionado: [null, [Validators.required]],
+      tapeteSelecionado: [null, [Validators.required]],
       pressaoFerramenta: ['', [Validators.required]],
-      canetaSelecionada: ['', []],
-      laminaSelecionado: ['', [Validators.required]],
+      canetaSelecionada: [null, []],
+      laminaSelecionado: [null, [Validators.required]],
       profundidadeLamina: ['', [Validators.required]],
       tipoProcesso: ['Corte'],
       tecido: false,
@@ -92,26 +120,6 @@ export class NovoProcessoComponent implements OnInit {
   salvar(): void {
     const formData = this.getFormData();
 
-    const idCaneta: number = this.convertToNumber(
-      formData.value.canetaSelecionada
-    );
-    const canetaDto: CanetaDto = this.canetaService.obter(idCaneta);
-
-    const idMaterial: number = this.convertToNumber(
-      formData.value.materialSelecionado
-    );
-    const materialDto: MaterialDto = this.materialService.obter(idMaterial);
-
-    const idTapete: number = this.convertToNumber(
-      formData.value.tapeteSelecionado
-    );
-    const tapeteDto: TapeteDto = this.tapeteService.obter(idTapete);
-
-    const idLamina: number = this.convertToNumber(
-      formData.value.laminaSelecionado
-    );
-    const laminaDto: LaminaDto = this.laminaService.obter(idLamina);
-
     const profundidadeLamina: number = this.convertToNumber(
       formData.value.profundidadeLamina
     );
@@ -125,18 +133,18 @@ export class NovoProcessoComponent implements OnInit {
     const tecido: boolean = formData.value.tecido;
 
     const processo: ProcessoDto = {
-      codigo: 0,
-      materialDto: materialDto,
-      tapeteDto: tapeteDto,
-      canetaDto: canetaDto,
+      id: 0,
+      materialDto: formData.value.materialSelecionado,
+      tapeteDto: formData.value.tapeteSelecionado,
+      canetaDto: formData.value.canetaSelecionada,
       pressaoFerramenta: pressaoFerramenta,
       tipo: tipoProcesso,
-      laminaDto: laminaDto,
+      laminaDto: formData.value.laminaSelecionado,
       profundidadeLamina: profundidadeLamina,
       tecido: tecido,
     };
 
-    this.processoService.salver(processo);
+    this.processoService.salvar(processo);
   }
 
   private convertToNumber(id: string): number {

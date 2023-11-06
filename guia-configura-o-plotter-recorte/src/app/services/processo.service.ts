@@ -6,36 +6,37 @@ import { TapeteDto } from '../model/tapete-dto';
 import { Injectable } from '@angular/core';
 import { WebStorageUtil } from '../utils/webStorageUtils';
 import { Constants } from '../utils/constantes';
+import { ProcessoHttpConnectorService } from './processo-http-connector.service';
 
 // Itens de exemplo para MaterialDto
 const material1: MaterialDto = {
-  codigo: 1,
+  id: 1,
   nome: 'Material A',
   gramatura: 500,
 };
 
 // Itens de exemplo para TapeteDto
 const tapete1: TapeteDto = {
-  codigo: 1,
+  id: 1,
   cor: 'Azul',
   forcaAderencia: 'Alta',
 };
 
 // Itens de exemplo para CanetaDto
 const caneta1: CanetaDto = {
-  codigo: 1,
+  id: 1,
   espessura: 0.5,
 };
 
 // Itens de exemplo para LaminaDto
 const lamina1: LaminaDto = {
-  codigo: 1,
+  id: 1,
   cor: 'Prata',
   tipoCorte: 'Fino',
 };
 
 const processoDefault: ProcessoDto = {
-  codigo: 0,
+  id: 0,
   materialDto: material1,
   tapeteDto: tapete1,
   canetaDto: caneta1,
@@ -52,49 +53,51 @@ const processoDefault: ProcessoDto = {
 export class ProcessoService {
   processos: ProcessoDto[];
 
-  constructor() {
-    this.processos = WebStorageUtil.get(Constants.PROCESSO_KEY);
+  constructor(private httpConnector: ProcessoHttpConnectorService) {
+    this.httpConnector
+      .listar()
+      .then((processos) => {
+        this.processos = processos;
+        WebStorageUtil.set(Constants.PROCESSO_KEY, processos);
+      })
+      .catch((error) => {
+        this.processos = WebStorageUtil.get(Constants.PROCESSO_KEY);
+      });
   }
 
-  listar(filtro: string): ProcessoDto[] {
-    if (filtro === 'Todos') {
-      return this.processos;
-    }
-    return this.processos.filter((processo) => processo.tipo === filtro);
+  listar(): Promise<ProcessoDto[]> {
+    return this.httpConnector.listar();
   }
 
-  obter(id: number): ProcessoDto {
-    for (let index = 0; index < this.processos.length; index++) {
-      const element = this.processos[index];
-      if (element.codigo == id) {
-        return element;
-      }
-    }
-    return processoDefault;
+  listarComfiltro(filter: string): Promise<ProcessoDto[]> {
+    return this.httpConnector.listarComfiltro(filter);
   }
 
-  salver(processo: ProcessoDto) {
+  obter(id: number): Promise<ProcessoDto> {
+    return this.httpConnector.obter(id);
+  }
+
+  salvar(processo: ProcessoDto): void {
     let maiorCodigo = 0;
     for (let index = 0; index < this.processos.length; index++) {
       const element = this.processos[index];
-      if (element.codigo > maiorCodigo) {
-        maiorCodigo = element.codigo;
+      if (element.id > maiorCodigo) {
+        maiorCodigo = element.id;
       }
     }
 
-    processo.codigo = maiorCodigo + 1;
+    processo.id = maiorCodigo + 1;
     this.processos.push(processo);
+
     WebStorageUtil.set(Constants.PROCESSO_KEY, this.processos);
+    this.httpConnector.salvar(processo);
   }
 
   remover(id: number) {
-    console.log('Id do processo a ser removido: ', id);
     for (let index = 0; index < this.processos.length; index++) {
       const element = this.processos[index];
-      if (element.codigo == id) {
-        console.log('Processo a ser removido: ', element);
+      if (element.id == id) {
         this.processos.splice(index, 1);
-        console.log('lista restantte: ', this.processos);
       }
     }
     WebStorageUtil.set(Constants.PROCESSO_KEY, this.processos);

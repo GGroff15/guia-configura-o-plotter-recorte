@@ -1,23 +1,13 @@
 import { Injectable } from '@angular/core';
 import { MaterialDto } from '../model/material-dto';
+import { MaterialHttpConnectorService } from './material-http-connector.service';
+import { WebStorageUtil } from '../utils/webStorageUtils';
+import { Constants } from '../utils/constantes';
 
 const materialDefault: MaterialDto = {
-  codigo: 0,
+  id: 0,
   nome: '',
   gramatura: 0
-};
-
-// Itens de exemplo para MaterialDto
-const material1: MaterialDto = {
-  codigo: 1,
-  nome: 'Material A',
-  gramatura: 500
-};
-
-const material2: MaterialDto = {
-  codigo: 2,
-  nome: 'Material B',
-  gramatura: 220
 };
 
 @Injectable({
@@ -27,21 +17,20 @@ export class MaterialService {
 
   private materiais: MaterialDto[];
 
-  constructor() {
-    this.materiais = [material1, material2];
+  constructor(private httpConnector: MaterialHttpConnectorService) {
+    this.httpConnector.listar().then((materiais) => {
+      this.materiais = materiais;
+      WebStorageUtil.set(Constants.MATERIAL_KEY, materiais);
+    }).catch((erro) => {
+      this.materiais = WebStorageUtil.get(Constants.MATERIAL_KEY);
+    });
   }
 
-  listar() : MaterialDto[] {
-    return this.materiais;
+  listar() : Promise<MaterialDto[]> {
+    return this.httpConnector.listar();
   }
 
-  obter(id: number): MaterialDto {
-    for (let index = 0; index < this.materiais.length; index++) {
-      const element = this.materiais[index];
-      if (element.codigo === id) {
-        return element;
-      }
-    }
-    return materialDefault;
+  obter(id: number): Promise<MaterialDto> {
+    return this.httpConnector.obter(id);
   }
 }

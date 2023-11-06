@@ -3,9 +3,10 @@ import { TapeteDto } from '../model/tapete-dto';
 import { LaminaDto } from '../model/lamina-dto';
 import { WebStorageUtil } from '../utils/webStorageUtils';
 import { Constants } from '../utils/constantes';
+import { TapeteHttpConnectorService } from './tapete-http-connector.service';
 
 const tapeteDefault: TapeteDto = {
-  codigo: 0,
+  id: 0,
   cor: '',
   forcaAderencia: '',
 };
@@ -17,28 +18,27 @@ export class TapetesService {
   
   private tapetes: TapeteDto[];
 
-  constructor() {
-    this.tapetes = WebStorageUtil.get(Constants.TAPETE_KEY);
+  constructor(private httpConnector: TapeteHttpConnectorService) {
+    this.httpConnector.listar().then((tapetes) => {
+      this.tapetes = tapetes;
+      WebStorageUtil.set(Constants.TAPETE_KEY, tapetes);
+    }).catch((error) => {
+      this.tapetes = WebStorageUtil.get(Constants.TAPETE_KEY);
+    });
   }
 
-  listar(): TapeteDto[] {
-    return this.tapetes;
+  listar(): Promise<TapeteDto[]> {
+    return this.httpConnector.listar();
   }
 
-  obter(id: number) {
-    for (let index = 0; index < this.tapetes.length; index++) {
-      const element = this.tapetes[index];
-      if (element.codigo == id) {
-        return element
-      }
-    }
-    return tapeteDefault;
+  obter(id: number): Promise<TapeteDto> {
+    return this.httpConnector.obter(id);
   }
 
   remover(id: number) {
     for (let index = 0; index < this.tapetes.length; index++) {
       const element = this.tapetes[index];
-      if (element.codigo == id) {
+      if (element.id == id) {
         this.tapetes.splice(index, 1);
       }
     }
@@ -49,13 +49,15 @@ export class TapetesService {
     let maiorCodigo = 0;
     for (let index = 0; index < this.tapetes?.length; index++) {
       const element = this.tapetes[index];
-      if (element.codigo > maiorCodigo) {
-        maiorCodigo = element.codigo;
+      if (element.id > maiorCodigo) {
+        maiorCodigo = element.id;
       }
     }
 
-    tapete.codigo = maiorCodigo+1;
+    tapete.id = maiorCodigo+1;
     this.tapetes.push(tapete);
+
     WebStorageUtil.set(Constants.TAPETE_KEY, this.tapetes);
+    this.httpConnector.salvar(tapete);
   }
 }

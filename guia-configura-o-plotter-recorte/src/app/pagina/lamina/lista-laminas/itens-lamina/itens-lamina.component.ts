@@ -2,7 +2,9 @@ import { Component, ElementRef, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { LaminaDto } from 'src/app/model/lamina-dto';
 import { LaminaService } from 'src/app/services/lamina.service';
-import { ListaLaminasService } from '../lista-laminas.service';
+import { ListaLaminasService } from '../../lista-laminas.service';
+import { WebStorageUtil } from 'src/app/utils/webStorageUtils';
+import { Constants } from 'src/app/utils/constantes';
 
 @Component({
   selector: 'app-itens-lamina',
@@ -15,12 +17,11 @@ export class ItensLaminaComponent {
   lamina!: LaminaDto;
   private observer: MutationObserver;
 
-  constructor(private service: LaminaService,
-    private listaLaminasService: ListaLaminasService,
+  constructor(private listaLaminasService: ListaLaminasService,
     private router: Router,
     private elementRef: ElementRef,
     private ngZone: NgZone) {
-    this.laminas = service.listar();
+    this.listarLaminas();
     this.observer = new MutationObserver((mutationsList, observer) => {
       this.ngZone.run(() => {
         mutationsList.forEach((mutation) => {
@@ -40,8 +41,16 @@ export class ItensLaminaComponent {
     });
   }
 
+  private listarLaminas() {
+    this.listaLaminasService.listar().then((laminas) => {
+      this.laminas = laminas;
+    }).catch((erro) => {
+      this.laminas = WebStorageUtil.get(Constants.LAMINA_KEY);
+    });
+  }
+
   ngOnInit(): void {
-    this.listaLaminasService.getListaLaminas().subscribe((laminas) => {
+    this.listaLaminasService.asObservable().subscribe((laminas) => {
       this.laminas = laminas;
       this.iniciarObservacaoDOM();
     });
@@ -61,10 +70,10 @@ export class ItensLaminaComponent {
   }
 
   navegarParaEdicao() {
-    this.router.navigate(['/editar-lamina', this.lamina.codigo]);
+    this.router.navigate(['/editar-lamina', this.lamina.id]);
   }
 
   remover() {
-    this.service.remover(this.lamina.codigo);
+    this.listaLaminasService.remover(this.lamina.id);
   }
 }

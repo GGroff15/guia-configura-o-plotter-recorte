@@ -1,6 +1,6 @@
 export interface MaterialDto {
 
-    codigo: number;
+    id: number;
     nome: string;
     gramatura: number;
 

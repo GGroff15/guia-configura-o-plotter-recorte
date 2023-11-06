@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ListaProcessosService } from '../lista-processos.service';
+import { ListaProcessosService } from '../../lista-processos.service';
 
 @Component({
   selector: 'app-filtro-tipo-processo',

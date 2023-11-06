@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CanetaDto } from 'src/app/model/caneta-dto';
 import { CanetaService } from 'src/app/services/caneta.service';
+import { ListaCanetasService } from '../lista-canetas.service';
 
 @Component({
   selector: 'app-nova-caneta',
@@ -13,7 +14,7 @@ export class NovaCanetaComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private service: CanetaService
+    private service: ListaCanetasService
   ) {
     this.formData = this.formBuilder.group({
       espessura: ['', [Validators.required]],
@@ -26,9 +27,9 @@ export class NovaCanetaComponent {
 
   salvar() {
     const formData = this.formData;
-    const espessura = this.convertToNumber(formData.value.espessura);
+    const espessura: number = this.convertToNumber(formData.value.espessura);
     const caneta: CanetaDto = {
-      codigo: 0,
+      id: 0,
       espessura: espessura,
     };
 
