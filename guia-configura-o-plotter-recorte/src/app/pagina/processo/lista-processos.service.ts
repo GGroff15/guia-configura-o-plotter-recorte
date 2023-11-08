@@ -17,7 +17,7 @@ export class ListaProcessosService {
     this.atualizarListaProcessos();
   }
 
-  listar(): Promise<ProcessoDto[]> {
+  listar(): Observable<ProcessoDto[]> {
     this.atualizarListaProcessos();
 
     if(this.selectedFilter === 'Todos') {
@@ -38,21 +38,20 @@ export class ListaProcessosService {
 
   private atualizarListaProcessos() {
     if (this.selectedFilter === 'Todos') {
-      this.service.listar().then((processso) => {
+      this.service.listar().subscribe((processso) => {
         this.processosSource.next(processso);
         WebStorageUtil.set(Constants.PROCESSO_KEY, processso);
-      }).catch((error) => {
+      }, (error) => {
         this.processosSource.next(WebStorageUtil.get(Constants.PROCESSO_KEY));
       });
     } else {
-      this.service.listarComfiltro(this.selectedFilter).then((processso) => {
+      this.service.listarComfiltro(this.selectedFilter).subscribe((processso) => {
         this.processosSource.next(processso);
         WebStorageUtil.set(Constants.PROCESSO_KEY, processso);
-      }).catch((error) => {
+      }, (error) => {
         this.processosSource.next(WebStorageUtil.get(Constants.PROCESSO_KEY));
       });
     }
-
   }
 
   asObservable(): Observable<ProcessoDto[]> {
