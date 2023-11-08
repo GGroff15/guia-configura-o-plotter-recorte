@@ -28,5 +28,5 @@ https://www.figma.com/proto/xDm88myoxEUtW0HVH1NvDh/Configura%C3%A7%C3%A3o-Plotte
 - [X] Cadastrar uma entidade usando uma API (JSON Server).
 - [x] Apresentar uma lista de dados com a diretiva estrutural ngFor.
 - [x] Usar a diretiva ngIf
-- [ ] Formatar a apresentação de dados com Pipes.
+- [x] Formatar a apresentação de dados com Pipes.
 - [ ] Build e deploy da aplicação.
