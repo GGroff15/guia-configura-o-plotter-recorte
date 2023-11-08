@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { WebStorageUtil } from '../utils/webStorageUtils';
 import { Constants } from '../utils/constantes';
 import { ProcessoHttpConnectorService } from './processo-http-connector.service';
+import { Observable } from 'rxjs';
 
 // Itens de exemplo para MaterialDto
 const material1: MaterialDto = {
@@ -55,21 +56,19 @@ export class ProcessoService {
 
   constructor(private httpConnector: ProcessoHttpConnectorService) {
     this.httpConnector
-      .listar()
-      .then((processos) => {
+      .listar().subscribe((processos) => {
         this.processos = processos;
         WebStorageUtil.set(Constants.PROCESSO_KEY, processos);
-      })
-      .catch((error) => {
+      },(error) => {
         this.processos = WebStorageUtil.get(Constants.PROCESSO_KEY);
       });
   }
 
-  listar(): Promise<ProcessoDto[]> {
+  listar(): Observable<ProcessoDto[]> {
     return this.httpConnector.listar();
   }
 
-  listarComfiltro(filter: string): Promise<ProcessoDto[]> {
+  listarComfiltro(filter: string): Observable<ProcessoDto[]> {
     return this.httpConnector.listarComfiltro(filter);
   }
 

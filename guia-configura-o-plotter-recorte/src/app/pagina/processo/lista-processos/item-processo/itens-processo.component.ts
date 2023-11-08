@@ -43,11 +43,11 @@ export class ItensProcessoComponent implements OnInit {
 
   listarProcessos() {
     this.listaProcessosService.setFiltro('Todos');
-    this.listaProcessosService.listar().then((processos) => {
+    this.listaProcessosService.listar().subscribe((processos) => {
       this.processos = processos;
-    }).catch((erro) => {
+    }, (erro) => {
       this.processos = WebStorageUtil.get(Constants.PROCESSO_KEY);
-    })
+    });
   }
 
   ngOnInit(): void {
