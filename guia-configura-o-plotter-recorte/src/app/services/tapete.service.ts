@@ -62,4 +62,15 @@ export class TapetesService {
     WebStorageUtil.set(Constants.TAPETE_KEY, this.tapetes);
     this.httpConnector.salvar(tapete);
   }
+
+  atualizar(tapete: TapeteDto): Promise<TapeteDto> {
+    for (let index = 0; index < this.tapetes.length; index++) {
+      const element = this.tapetes[index];
+      if (element.id == tapete.id) {
+        this.tapetes[index] = tapete;
+      }
+    }
+    WebStorageUtil.set(Constants.CANETA_KEY, this.tapetes);
+    return this.httpConnector.atualizar(tapete);
+  }
 }
