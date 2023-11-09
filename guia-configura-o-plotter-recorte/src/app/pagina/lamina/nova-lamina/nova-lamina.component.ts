@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LaminaDto } from 'src/app/model/lamina-dto';
-import { LaminaService } from 'src/app/services/lamina.service';
 import { ListaLaminasService } from '../lista-laminas.service';
 
 @Component({

@@ -1,7 +1,6 @@
 import { Component, ElementRef, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { LaminaDto } from 'src/app/model/lamina-dto';
-import { LaminaService } from 'src/app/services/lamina.service';
 import { ListaLaminasService } from '../../lista-laminas.service';
 import { WebStorageUtil } from 'src/app/utils/webStorageUtils';
 import { Constants } from 'src/app/utils/constantes';
