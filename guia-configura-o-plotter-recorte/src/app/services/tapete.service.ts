@@ -42,7 +42,9 @@ export class TapetesService {
         this.tapetes.splice(index, 1);
       }
     }
-    WebStorageUtil.set(Constants.TAPETE_KEY, this.tapetes);
+    this.httpConnector.remover(id).subscribe((response) => {
+      WebStorageUtil.set(Constants.TAPETE_KEY, this.tapetes);
+    });
   }
 
   salvar(tapete: TapeteDto) {
