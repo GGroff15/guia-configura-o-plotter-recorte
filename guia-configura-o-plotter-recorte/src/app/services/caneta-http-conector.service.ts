@@ -31,4 +31,15 @@ export class CanetaHttpConectorService implements HttpConnectorService<CanetaDto
   remover(id: number): Observable<any> {
     return this.http.delete(`http://localhost:3000/canetas/${id}`);
   }
+
+  atualizar(caneta: CanetaDto): Promise<CanetaDto> {
+    const tipoJson: string = JSON.stringify(caneta);
+    return this.http
+      .put<CanetaDto>(
+        `http://localhost:3000/canetas/${caneta.id}`,
+        tipoJson,
+        this.httpOptions
+      )
+      .toPromise();
+  }
 }
