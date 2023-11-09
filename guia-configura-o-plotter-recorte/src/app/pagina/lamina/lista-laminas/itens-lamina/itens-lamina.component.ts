@@ -14,31 +14,10 @@ import { Constants } from 'src/app/utils/constantes';
 export class ItensLaminaComponent {
 
   laminas: LaminaDto[];
-  lamina!: LaminaDto;
-  private observer: MutationObserver;
 
   constructor(private listaLaminasService: ListaLaminasService,
-    private router: Router,
-    private elementRef: ElementRef,
-    private ngZone: NgZone) {
+    private router: Router) {
     this.listarLaminas();
-    this.observer = new MutationObserver((mutationsList, observer) => {
-      this.ngZone.run(() => {
-        mutationsList.forEach((mutation) => {
-          mutation.addedNodes.forEach((addedNode) => {
-            if (addedNode instanceof HTMLElement) {
-              console.log(addedNode);
-              if (addedNode.classList.contains('initialize-dropdown')) {
-                console.log(addedNode);
-                const a = addedNode.querySelector('.dropdown-trigger');
-                console.log(a);
-                M.Dropdown.init(a!);
-              }
-            }
-          });
-        });
-      });
-    });
   }
 
   private listarLaminas() {
@@ -52,28 +31,14 @@ export class ItensLaminaComponent {
   ngOnInit(): void {
     this.listaLaminasService.asObservable().subscribe((laminas) => {
       this.laminas = laminas;
-      this.iniciarObservacaoDOM();
     });
   }
 
-  ngOnDestroy() {
-    this.observer.disconnect();
+  navegarParaEdicao(id: number) {
+    this.router.navigate(['/editar-lamina', id]);
   }
 
-  iniciarObservacaoDOM() {
-    const config = { childList: true, subtree: true };
-    this.observer.observe(this.elementRef.nativeElement, config);
-  }
-
-  openDropdown(lamina: LaminaDto) {
-    this.lamina = lamina;
-  }
-
-  navegarParaEdicao() {
-    this.router.navigate(['/editar-lamina', this.lamina.id]);
-  }
-
-  remover() {
-    this.listaLaminasService.remover(this.lamina.id);
+  remover(id: number) {
+    this.listaLaminasService.remover(id);
   }
 }
