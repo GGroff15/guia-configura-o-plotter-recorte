@@ -72,11 +72,11 @@ export class ItensProcessoComponent implements OnInit {
     this.processo = processo;
   }
 
-  navegarParaEdicao() {
-    this.router.navigate(['/editar-processo', this.processo.id]);
+  navegarParaEdicao(id: number) {
+    this.router.navigate(['/editar-processo', id]);
   }
 
-  remover() {
-    this.listaProcessosService.remover(this.processo.id);
+  remover(id: number) {
+    this.listaProcessosService.remover(id);
   }
 }
