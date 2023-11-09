@@ -20,15 +20,6 @@
         </p>
       </div>
       <div class="col s1 m1 l1 center valign-wrapper">
-        <!--
-        <a
-          href="#"
-          class="dropdown-trigger"
-          data-target="menu"
-          (click)="openDropdown(processo)"
-          ><i class="material-icons center">more_vert</i></a
-        >
-        -->
         <app-dropdown [item]="processo" (removeEvent)="remover($event)" (editEvent)="navegarParaEdicao($event)"></app-dropdown>
       </div>
     </div>
