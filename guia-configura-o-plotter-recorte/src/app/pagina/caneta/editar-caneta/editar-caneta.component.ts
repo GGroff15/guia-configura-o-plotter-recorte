@@ -18,7 +18,6 @@ export class EditarCanetaComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private cdr: ChangeDetectorRef,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private service: CanetaService

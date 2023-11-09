@@ -31,4 +31,15 @@ export class LaminaHttpConnectorService implements HttpConnectorService<LaminaDt
   remover(id: number): Observable<any> {
     return this.http.delete(`http://localhost:3000/laminas/${id}`);
   }
+
+  atualizar(lamina: LaminaDto) {
+    const tipoJson: string = JSON.stringify(lamina);
+    return this.http
+      .put<LaminaDto>(
+        `http://localhost:3000/laminas/${lamina.id}`,
+        tipoJson,
+        this.httpOptions
+      )
+      .toPromise();
+  }
 }

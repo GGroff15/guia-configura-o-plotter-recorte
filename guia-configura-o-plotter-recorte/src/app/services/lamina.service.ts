@@ -62,4 +62,8 @@ export class LaminaService {
     WebStorageUtil.set(Constants.LAMINA_KEY, this.laminas);
     this.httpConnector.salvar(lamina);
   }
+
+  atualizar(lamina: LaminaDto) {
+    return this.httpConnector.atualizar(lamina);
+  }
 }
