@@ -39,7 +39,9 @@ export class CanetaService {
         this.canetas.splice(index, 1);
       }
     }
-    WebStorageUtil.set(Constants.CANETA_KEY, this.canetas);
+    this.httpConnector.remover(id).subscribe((response) => {
+      WebStorageUtil.set(Constants.CANETA_KEY, this.canetas);
+    })
   }
 
   salvar(caneta: CanetaDto) {
