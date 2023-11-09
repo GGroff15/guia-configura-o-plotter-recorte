@@ -52,6 +52,7 @@ const processoDefault: ProcessoDto = {
   providedIn: 'root',
 })
 export class ProcessoService {
+  
   processos: ProcessoDto[];
 
   constructor(private httpConnector: ProcessoHttpConnectorService) {
@@ -92,6 +93,17 @@ export class ProcessoService {
     this.httpConnector.salvar(processo);
   }
 
+  atualizar(processo: ProcessoDto): Promise<ProcessoDto> {
+    for (let index = 0; index < this.processos.length; index++) {
+      const element = this.processos[index];
+      if (element.id == processo.id) {
+        this.processos[index] = processo;
+      }
+    }
+    WebStorageUtil.set(Constants.PROCESSO_KEY, this.processos);
+    return this.httpConnector.atualizar(processo);
+  }
+
   remover(id: number) {
     for (let index = 0; index < this.processos.length; index++) {
       const element = this.processos[index];
@@ -99,6 +111,8 @@ export class ProcessoService {
         this.processos.splice(index, 1);
       }
     }
-    WebStorageUtil.set(Constants.PROCESSO_KEY, this.processos);
+    this.httpConnector.remover(id).subscribe((response) => {
+      WebStorageUtil.set(Constants.PROCESSO_KEY, this.processos);
+    });
   }
 }
