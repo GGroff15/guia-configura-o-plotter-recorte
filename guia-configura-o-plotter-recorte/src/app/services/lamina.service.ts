@@ -41,8 +41,9 @@ export class LaminaService {
         this.laminas.splice(index, 1);
       } 
     }
-
-    WebStorageUtil.set(Constants.LAMINA_KEY, this.laminas);
+    this.httpConnector.remover(id).subscribe((response) => {
+      WebStorageUtil.set(Constants.LAMINA_KEY, this.laminas);
+    })
   }
 
   salvar(lamina: LaminaDto) {

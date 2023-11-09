@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LaminaDto } from '../model/lamina-dto';
 import { HttpConnectorService } from './http-connector-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,9 @@ export class LaminaHttpConnectorService implements HttpConnectorService<LaminaDt
 
   obter(id: number): Promise<LaminaDto> {
     return this.http.get<LaminaDto>(`http://localhost:3000/laminas/${id}`).toPromise();
+  }
+
+  remover(id: number): Observable<any> {
+    return this.http.delete(`http://localhost:3000/laminas/${id}`);
   }
 }
