@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LaminaDto } from 'src/app/model/lamina-dto';
 import { LaminaService } from 'src/app/services/lamina.service';
+import { ListaLaminasService } from '../lista-laminas.service';
 
 @Component({
   selector: 'app-nova-lamina',
@@ -14,7 +15,7 @@ export class NovaLaminaComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private service: LaminaService
+    private service: ListaLaminasService
   ) {
     this.formData = this.formBuilder.group({
       cor: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
