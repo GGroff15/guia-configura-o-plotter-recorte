@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-dropdown',
@@ -12,7 +12,19 @@ export class DropdownComponent {
 
   isDropdownOpen = false;
 
-  toggleDropdown() {
+  constructor(private el: ElementRef) {
+
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: Event): void {
+    if (!this.el.nativeElement.contains(event.target)) {
+      this.isDropdownOpen = false;
+    }
+  }
+
+  toggleDropdown(event: Event) {
+    event.stopPropagation();
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
