@@ -9,6 +9,7 @@ import { Observable, catchError } from 'rxjs';
 })
 export class ProcessoHttpConnectorService
 {
+  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
@@ -37,9 +38,24 @@ export class ProcessoHttpConnectorService
       .toPromise();
   }
 
+  atualizar(processo: ProcessoDto): Promise<ProcessoDto> {
+    const tipoJson: string = JSON.stringify(processo);
+    return this.http
+      .put<ProcessoDto>(
+        `http://localhost:3000/processos/${processo.id}`,
+        tipoJson,
+        this.httpOptions
+      )
+      .toPromise();
+  }
+
   obter(id: number): Promise<ProcessoDto> {
     return this.http
       .get<ProcessoDto>(`http://localhost:3000/processos/${id}`)
       .toPromise();
+  }
+
+  remover(id: number): Observable<any> {
+    return this.http.delete(`http://localhost:3000/processos/${id}`);
   }
 }

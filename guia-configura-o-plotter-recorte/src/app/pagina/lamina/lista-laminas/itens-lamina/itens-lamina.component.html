@@ -12,18 +12,8 @@
         </p>
       </div>
       <div class="col s1 m1 l1 center valign-wrapper">
-        <a
-          class="dropdown-trigger"
-          data-target="menu"
-          (click)="openDropdown(lamina)"
-          ><i class="material-icons center">more_vert</i></a
-        >
+        <app-dropdown [item]="lamina" (removeEvent)="remover($event)" (editEvent)="navegarParaEdicao($event)"></app-dropdown>
       </div>
     </div>
   </li>
-</ul>
-
-<ul id="menu" class="dropdown-content">
-  <li><a (click)="navegarParaEdicao()">Editar</a></li>
-  <li><a (click)="remover()">Excluir</a></li>
 </ul>

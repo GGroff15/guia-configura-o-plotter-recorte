@@ -1,6 +1,6 @@
 <h4>Editar Processo</h4>
 
-<form [formGroup]="formData">
+<form [formGroup]="formData" (submit)="salvar()">
   <h5>Base</h5>
   <div>
     <label for="material">Material: *</label>
@@ -16,6 +16,15 @@
           {{ material.nome }} - {{ material.gramatura }} gramas
         </option>
       </select>
+      <span
+        class="red-text"
+        *ngIf="
+          this.formData.controls.materialSelecionado.errors?.required &&
+          this.formData.controls.materialSelecionado.touched
+        "
+      >
+        É obrigatório escolher um material
+      </span>
     </div>
   </div>
 
@@ -33,6 +42,15 @@
           {{ tapete.cor }} - {{ tapete.forcaAderencia }}
         </option>
       </select>
+      <span
+        class="red-text"
+        *ngIf="
+          this.formData.controls.tapeteSelecionado.errors?.required &&
+          this.formData.controls.tapeteSelecionado.touched
+        "
+      >
+        É obrigatório escolher um tapete
+      </span>
     </div>
   </div>
 
@@ -43,6 +61,15 @@
       formControlName="pressaoFerramenta"
     />
     <label for="pressao-ferramenta">Pressão Ferramenta: *</label>
+    <span
+      class="red-text"
+      *ngIf="
+        this.formData.controls.pressaoFerramenta.errors?.required &&
+        this.formData.controls.pressaoFerramenta.touched
+      "
+    >
+      É obrigatório informar a pressão da ferramenta
+    </span>
   </div>
 
   <h5>Processo</h5>
@@ -65,7 +92,7 @@
     >
   </div>
 
-  <div *ngIf="formData.get('tipoProcesso')?.value === 'Corte'">
+  <div *ngIf="formData?.get('tipoProcesso')?.value === 'Corte'">
     <div class="col s12">
       <label for="tipo-lamina">Lâmina *</label>
       <div class="input-field col s12">
@@ -75,11 +102,22 @@
           formControlName="laminaSelecionado"
           class="browser-default"
         >
-          <option [ngValue]="null" disabled selected>Selecione uma lâmina</option>
+          <option [ngValue]="null" disabled selected>
+            Selecione uma lâmina
+          </option>
           <option *ngFor="let lamina of laminas" [ngValue]="lamina">
             {{ lamina.cor }} - {{ lamina.tipoCorte }}
           </option>
         </select>
+        <span
+          class="red-text"
+          *ngIf="
+            this.formData.controls.laminaSelecionado.errors?.required &&
+            this.formData.controls.laminaSelecionado.touched
+          "
+        >
+          É obrigatório escolher uma lâmina
+        </span>
       </div>
     </div>
     <div class="input-field col s12">
@@ -90,9 +128,18 @@
       />
       <label for="profundidade-lamina">Profundidade Lâmina: *</label>
     </div>
+    <span
+      class="red-text"
+      *ngIf="
+        this.formData.controls.profundidadeLamina.errors?.required &&
+        this.formData.controls.profundidadeLamina.touched
+      "
+    >
+      É obrigatório informar a profundidade da lâmina
+    </span>
   </div>
 
-  <div *ngIf="formData.get('tipoProcesso')?.value === 'Desenho'">
+  <div *ngIf="formData?.get('tipoProcesso')?.value === 'Desenho'">
     <label for="tipo-caneta">Caneta</label>
     <div class="input-field col s12">
       <select
@@ -106,6 +153,15 @@
           {{ caneta.espessura }}mm
         </option>
       </select>
+      <span
+        class="red-text"
+        *ngIf="
+          this.formData.controls.canetaSelecionada.errors?.required &&
+          this.formData.controls.canetaSelecionada.touched
+        "
+      >
+        É obrigatório escolher uma caneta
+      </span>
     </div>
   </div>
 
@@ -115,4 +171,8 @@
       <span>Tecido</span>
     </label>
   </div>
+
+  <button type="submit" class="waves-effect waves-light btn">
+    Salvar
+  </button>
 </form>

@@ -14,30 +14,10 @@ import { Constants } from 'src/app/utils/constantes';
 export class ItensCanetaComponent implements OnInit {
 
   canetas: CanetaDto[];
-  caneta!: CanetaDto;
-  private observer: MutationObserver;
-  subscription!: Subscription;
 
   constructor(private listaCanetasService: ListaCanetasService,
-    private router: Router,
-    private elementRef: ElementRef,
-    private ngZone: NgZone) {
+    private router: Router) {
     this.listarCanetas();
-    
-    this.observer = new MutationObserver((mutationsList, observer) => {
-      this.ngZone.run(() => {
-        mutationsList.forEach((mutation) => {
-          mutation.addedNodes.forEach((addedNode) => {
-            if (addedNode instanceof HTMLElement) {
-              if (addedNode.classList.contains('initialize-dropdown')) {
-                const a = addedNode.querySelector('.dropdown-trigger');
-                M.Dropdown.init(a!);
-              }
-            }
-          });
-        });
-      });
-    });
   }
 
   private listarCanetas() {
@@ -49,32 +29,17 @@ export class ItensCanetaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription = this.listaCanetasService.asObservable().subscribe((canetas) => {
+    this.listaCanetasService.asObservable().subscribe((canetas) => {
       this.canetas = canetas;
-      this.iniciarObservacaoDOM();
     });
   }
 
-  ngOnDestroy() {
-    this.observer.disconnect();
-    this.subscription.unsubscribe();
+  navegarParaEdicao(id: number) {
+    this.router.navigate(['/editar-caneta', id]);
   }
 
-  iniciarObservacaoDOM() {
-    const config = { childList: true, subtree: true };
-    this.observer.observe(this.elementRef.nativeElement, config);
-  }
-
-  openDropdown(caneta: CanetaDto) {
-    this.caneta = caneta;
-  }
-
-  navegarParaEdicao() {
-    this.router.navigate(['/editar-caneta', this.caneta.id]);
-  }
-
-  remover() {
-    this.listaCanetasService.remover(this.caneta.id);
+  remover(id: number) {
+    this.listaCanetasService.remover(id);
   }
 
 }

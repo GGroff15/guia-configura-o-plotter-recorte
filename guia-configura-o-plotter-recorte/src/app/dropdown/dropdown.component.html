@@ -1,0 +1,9 @@
+<div class="dropdown" (click)="toggleDropdown($event)">
+  <a class="dropdown-btn">
+    <i class="material-icons center">more_vert</i>
+  </a>
+  <ul *ngIf="isDropdownOpen" class="dropdown-options">
+    <li (click)="editar()">Editar</li>
+    <li (click)="remover()">Remover</li>
+  </ul>
+</div>
