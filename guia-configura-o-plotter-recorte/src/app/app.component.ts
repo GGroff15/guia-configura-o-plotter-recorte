@@ -7,5 +7,5 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'guia-configura-o-plotter-recorte';
+  title = 'plotter-recorte';
 }
