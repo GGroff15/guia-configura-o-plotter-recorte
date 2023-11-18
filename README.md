@@ -2,6 +2,12 @@
 # Guia Rápido de Configuração para Plotters de Recorte
 
 Esse projeto apresenta um site para registro e controle das configurações para os processos de corte e desenho para plotters de recorte
+
+## Endereço Produção
+https://ggroff15.github.io/plotter-recorte/
+
+Obs: Para obter os dados do json-serve é necessários executar o comando: npx json-server --watch db.json
+
 ## Prototype
 
 https://www.figma.com/file/xDm88myoxEUtW0HVH1NvDh/Configura%C3%A7%C3%A3o-Plotter-Recorte?type=design&node-id=112%3A2034&mode=design&t=8Gp5rv8qE4C728Dl-1
@@ -29,4 +35,4 @@ https://www.figma.com/proto/xDm88myoxEUtW0HVH1NvDh/Configura%C3%A7%C3%A3o-Plotte
 - [x] Apresentar uma lista de dados com a diretiva estrutural ngFor.
 - [x] Usar a diretiva ngIf
 - [x] Formatar a apresentação de dados com Pipes.
-- [ ] Build e deploy da aplicação.
+- [x] Build e deploy da aplicação.
