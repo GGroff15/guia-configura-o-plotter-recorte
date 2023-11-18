@@ -20,13 +20,7 @@
         </p>
       </div>
       <div class="col s1 m1 l1 center valign-wrapper">
-        <a
-          href="#"
-          class="dropdown-trigger"
-          data-target="menu"
-          (click)="openDropdown(processo)"
-          ><i class="material-icons center">more_vert</i></a
-        >
+        <app-dropdown [item]="processo" (removeEvent)="remover($event)" (editEvent)="navegarParaEdicao($event)"></app-dropdown>
       </div>
     </div>
     <div class="collapsible-body row container">
@@ -56,11 +50,6 @@
           {{ processo.canetaDto.espessura }}mm
         </p>
       </div>
-    </div>   
+    </div>
   </li>
-</ul>
-
-<ul id="menu" class="dropdown-content">
-  <li><a (click)="navegarParaEdicao()">Editar</a></li>
-  <li><a (click)="remover()">Excluir</a></li>
 </ul>

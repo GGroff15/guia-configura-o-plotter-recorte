@@ -27,6 +27,8 @@ import { ItensTapeteComponent } from './pagina/tapete/lista-tapetes/itens-tapete
 import { EditarTapeteComponent } from './pagina/tapete/editar-tapete/editar-tapete.component';
 import { NovoTapeteComponent } from './pagina/tapete/novo-tapete/novo-tapete.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MilimeterPipe } from './pipes/milimeter.pipe';
+import { DropdownComponent } from './dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { HttpClientModule } from '@angular/common/http';
     ItensTapeteComponent,
     EditarTapeteComponent,
     NovoTapeteComponent,
+    MilimeterPipe,
+    DropdownComponent
   ],
   imports: [
     BrowserModule,

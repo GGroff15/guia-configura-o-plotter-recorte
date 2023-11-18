@@ -1,8 +1,12 @@
 <h4>Editar Caneta</h4>
 
-<form [formGroup]="formData">
+<form [formGroup]="formData" (submit)="salvar()">
   <div class="input-field col s12">
     <input id="espessura" type="number" formControlName="espessura" />
     <label for="pressao-ferramenta">Espessura (mm): *</label>
   </div>
+
+  <button type="submit" class="waves-effect waves-light btn">
+    Salvar
+  </button>
 </form>

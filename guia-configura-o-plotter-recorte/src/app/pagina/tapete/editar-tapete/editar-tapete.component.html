@@ -1,6 +1,6 @@
 <h4>Editar Tapete</h4>
 
-<form [formGroup]="formData">
+<form [formGroup]="formData" (submit)="salvar()">
   <div class="input-field col s12">
     <input id="cor" type="text" formControlName="cor" />
     <label for="cor">Cor: *</label>
@@ -10,4 +10,8 @@
     <input id="forca-aderencia" type="text" formControlName="forcaAderencia" />
     <label for="forca-aderencia">Força de Aderencia: *</label>
   </div>
+
+  <button type="submit" class="waves-effect waves-light btn">
+    Salvar
+  </button>
 </form>

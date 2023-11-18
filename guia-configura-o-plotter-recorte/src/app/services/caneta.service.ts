@@ -13,6 +13,7 @@ const canetaDefault: CanetaDto = {
   providedIn: 'root',
 })
 export class CanetaService {
+  
   private canetas: CanetaDto[];
 
   constructor(private httpConnector: CanetaHttpConectorService) {
@@ -39,7 +40,9 @@ export class CanetaService {
         this.canetas.splice(index, 1);
       }
     }
-    WebStorageUtil.set(Constants.CANETA_KEY, this.canetas);
+    this.httpConnector.remover(id).subscribe((response) => {
+      WebStorageUtil.set(Constants.CANETA_KEY, this.canetas);
+    })
   }
 
   salvar(caneta: CanetaDto) {
@@ -56,5 +59,16 @@ export class CanetaService {
 
     WebStorageUtil.set(Constants.CANETA_KEY, this.canetas);
     this.httpConnector.salvar(caneta);
+  }
+
+  atualizar(caneta: CanetaDto): Promise<CanetaDto> {
+    for (let index = 0; index < this.canetas.length; index++) {
+      const element = this.canetas[index];
+      if (element.id == caneta.id) {
+        this.canetas[index] = caneta;
+      }
+    }
+    WebStorageUtil.set(Constants.CANETA_KEY, this.canetas);
+    return this.httpConnector.atualizar(caneta);
   }
 }

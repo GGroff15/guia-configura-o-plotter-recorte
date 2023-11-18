@@ -1,6 +1,6 @@
 <h4>Editar Lâmina</h4>
 
-<form [formGroup]="formData">
+<form [formGroup]="formData" (submit)="salvar()">
   <div class="input-field col s12">
     <input id="cor" type="text" formControlName="cor" />
     <label for="cor">Cor: *</label>
@@ -10,4 +10,8 @@
     <input id="tipo-corte" type="text" formControlName="tipoCorte" />
     <label for="tipo-corte">Tipo de Corte: *</label>
   </div>
+
+  <button type="submit" class="waves-effect waves-light btn">
+    Salvar
+  </button>
 </form>

@@ -12,16 +12,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'guia-configura-o-plotter-recorte'`, () => {
+  it(`should have as title 'plotter-recorte'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('guia-configura-o-plotter-recorte');
+    expect(app.title).toEqual('plotter-recorte');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('guia-configura-o-plotter-recorte app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('plotter-recorte app is running!');
   });
 });

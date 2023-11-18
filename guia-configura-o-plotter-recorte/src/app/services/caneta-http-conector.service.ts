@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { CanetaDto } from 'src/app/model/caneta-dto';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -25,5 +26,20 @@ export class CanetaHttpConectorService implements HttpConnectorService<CanetaDto
 
   obter(id: number): Promise<CanetaDto> {
     return this.http.get<CanetaDto>(`http://localhost:3000/canetas/${id}`).toPromise();
+  }
+
+  remover(id: number): Observable<any> {
+    return this.http.delete(`http://localhost:3000/canetas/${id}`);
+  }
+
+  atualizar(caneta: CanetaDto): Promise<CanetaDto> {
+    const tipoJson: string = JSON.stringify(caneta);
+    return this.http
+      .put<CanetaDto>(
+        `http://localhost:3000/canetas/${caneta.id}`,
+        tipoJson,
+        this.httpOptions
+      )
+      .toPromise();
   }
 }

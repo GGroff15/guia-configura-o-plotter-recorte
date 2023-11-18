@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { WebStorageUtil } from '../utils/webStorageUtils';
 import { Constants } from '../utils/constantes';
 import { ProcessoHttpConnectorService } from './processo-http-connector.service';
+import { Observable } from 'rxjs';
 
 // Itens de exemplo para MaterialDto
 const material1: MaterialDto = {
@@ -51,25 +52,24 @@ const processoDefault: ProcessoDto = {
   providedIn: 'root',
 })
 export class ProcessoService {
+  
   processos: ProcessoDto[];
 
   constructor(private httpConnector: ProcessoHttpConnectorService) {
     this.httpConnector
-      .listar()
-      .then((processos) => {
+      .listar().subscribe((processos) => {
         this.processos = processos;
         WebStorageUtil.set(Constants.PROCESSO_KEY, processos);
-      })
-      .catch((error) => {
+      },(error) => {
         this.processos = WebStorageUtil.get(Constants.PROCESSO_KEY);
       });
   }
 
-  listar(): Promise<ProcessoDto[]> {
+  listar(): Observable<ProcessoDto[]> {
     return this.httpConnector.listar();
   }
 
-  listarComfiltro(filter: string): Promise<ProcessoDto[]> {
+  listarComfiltro(filter: string): Observable<ProcessoDto[]> {
     return this.httpConnector.listarComfiltro(filter);
   }
 
@@ -93,6 +93,17 @@ export class ProcessoService {
     this.httpConnector.salvar(processo);
   }
 
+  atualizar(processo: ProcessoDto): Promise<ProcessoDto> {
+    for (let index = 0; index < this.processos.length; index++) {
+      const element = this.processos[index];
+      if (element.id == processo.id) {
+        this.processos[index] = processo;
+      }
+    }
+    WebStorageUtil.set(Constants.PROCESSO_KEY, this.processos);
+    return this.httpConnector.atualizar(processo);
+  }
+
   remover(id: number) {
     for (let index = 0; index < this.processos.length; index++) {
       const element = this.processos[index];
@@ -100,6 +111,8 @@ export class ProcessoService {
         this.processos.splice(index, 1);
       }
     }
-    WebStorageUtil.set(Constants.PROCESSO_KEY, this.processos);
+    this.httpConnector.remover(id).subscribe((response) => {
+      WebStorageUtil.set(Constants.PROCESSO_KEY, this.processos);
+    });
   }
 }
